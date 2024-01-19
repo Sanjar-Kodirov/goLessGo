@@ -1,8 +1,6 @@
-import classes from './MainPage.module.scss';
-
 const MainPage = () => {
   return (
-    <div className={classes.layout}>
+    <div>
       <h2>Main page</h2>
     </div>
   );

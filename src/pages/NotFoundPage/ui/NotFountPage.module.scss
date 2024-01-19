@@ -1,0 +1,7 @@
+.notFountPage {
+  @apply flex flex-col gap-4 items-center justify-center h-full;
+
+  img {
+    @apply w-1/5;
+  }
+}
