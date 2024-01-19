@@ -1,2 +1,3 @@
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/Avatar";
+import { Avatar, AvatarFallback, AvatarImage } from './ui/Avatar';
+
 export { Avatar, AvatarImage, AvatarFallback };

@@ -1,16 +1,21 @@
-import { Navbar } from "@/widgets/Navbar";
-import { Outlet } from "react-router-dom";
-import { Sidebar } from "@/widgets/Sidebar";
-import { Suspense } from "react";
+import { Suspense } from 'react';
+
+import { Outlet } from 'react-router-dom';
+
+import { Navbar } from '@/widgets/Navbar';
+import { Sidebar } from '@/widgets/Sidebar';
+
 const MainLayout = () => {
   return (
-    <div className="flex flex-col h-screen">
+    <div className=" flex-col h-screen">
       <Navbar />
-      <div className="flex">
+      <div className="flex h-screen">
         <Sidebar />
-        <Suspense fallback={<div>Loading...</div>}>
-          <Outlet />
-        </Suspense>
+        <div className="grow p-4">
+          <Suspense fallback={<div>Loading...</div>}>
+            <Outlet />
+          </Suspense>
+        </div>
       </div>
     </div>
   );

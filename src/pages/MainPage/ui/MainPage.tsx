@@ -1,4 +1,5 @@
-import classes from "./MainPage.module.scss";
+import classes from './MainPage.module.scss';
+
 const MainPage = () => {
   return (
     <div className={classes.layout}>

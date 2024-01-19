@@ -1,6 +1,7 @@
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider } from 'react-router-dom';
 
-import { router } from "../shared/config/routeConfig/routes";
+import { router } from '../shared/config/routeConfig/routes';
+
 function App() {
   return <RouterProvider router={router} />;
 }
