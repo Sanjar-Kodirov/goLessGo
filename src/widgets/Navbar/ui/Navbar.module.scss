@@ -1,0 +1,19 @@
+.navbar {
+  @apply container shadow py-2;
+}
+.navbarNav {
+  @apply flex items-center justify-between;
+}
+.navLogo {
+  @apply w-12 h-12;
+}
+
+.navLins {
+  @apply flex;
+  li {
+    @apply p-2;
+    &:hover {
+      @apply text-primary bg-red-400 rounded-md text-white;
+    }
+  }
+}

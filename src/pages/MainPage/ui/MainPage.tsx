@@ -1,10 +1,8 @@
-import { Button } from "@/components/ui/button";
-
+import { Navbar } from "@/widgets/Navbar";
 const MainPage = () => {
   return (
     <div>
-      <h1> MainPage</h1>
-      <Button>Button</Button>
+      <Navbar />
     </div>
   );
 };
