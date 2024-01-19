@@ -1,8 +1,8 @@
-import { Navbar } from "@/widgets/Navbar";
+import classes from "./MainPage.module.scss";
 const MainPage = () => {
   return (
-    <div>
-      <Navbar />
+    <div className={classes.layout}>
+      <h2>Main page</h2>
     </div>
   );
 };

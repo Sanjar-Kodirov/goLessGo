@@ -1,8 +1,8 @@
 .navbar {
-  @apply container shadow py-2;
+  @apply shadow py-2;
 }
 .navbarNav {
-  @apply flex items-center justify-between;
+  @apply container flex items-center justify-between;
 }
 .navLogo {
   @apply w-12 h-12;

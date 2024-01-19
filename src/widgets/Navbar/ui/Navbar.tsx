@@ -1,9 +1,6 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/widgets/Avatar";
 import classes from "./Navbar.module.scss";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/widgets/Avatar/ui/avatar";
+
 const Navbar = () => {
   return (
     <div className={classes.navbar}>

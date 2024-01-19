@@ -1,4 +1,5 @@
 import { AboutPage } from "@/pages/AboutPage";
+import MainLayout from "@/pages/MainLayout";
 import { MainPage } from "@/pages/MainPage";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -14,11 +15,17 @@ export const RoutePath: Record<AppRoutes, string> = {
 
 export const router = createBrowserRouter([
   {
-    path: RoutePath.main,
-    element: <MainPage />,
-  },
-  {
-    path: RoutePath.about,
-    element: <AboutPage />,
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        path: RoutePath.main,
+        element: <MainPage />,
+      },
+      {
+        path: RoutePath.about,
+        element: <AboutPage />,
+      },
+    ],
   },
 ]);
