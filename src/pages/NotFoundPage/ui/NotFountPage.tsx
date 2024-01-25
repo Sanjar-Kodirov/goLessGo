@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
 import { RoutePath } from '@/shared/config/routeConfig/routes';
-import { Button } from '@/widgets/Button';
 
 import classes from './NotFountPage.module.scss';
+import { Button } from '@/shared/ui/Button';
 
 const NotFoundPage = () => {
   return (

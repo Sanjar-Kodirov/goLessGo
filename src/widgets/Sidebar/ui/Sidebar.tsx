@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { BrowseIconSvg, MusicIconSvg } from '@/shared/assets/svg/navigation';
 import { RoutePath } from '@/shared/config/routeConfig/routes';
-import { Button } from '@/widgets/Button';
 
 import classes from './Sidebar.module.scss';
+import { Button } from '@/shared/ui/Button';
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
