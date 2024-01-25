@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { Button } from '@/shared/ui/Button';
 import {
   Dialog,
@@ -36,6 +38,15 @@ const DialogUI = ({ children }: any) => {
 };
 
 const MainPage = () => {
+  const getReminders = async () => {
+    const response: any = await fetch('/api/reminders');
+    const data = response;
+    console.log('data', data);
+  };
+
+  useEffect(() => {
+    getReminders();
+  }, []);
   return (
     <div>
       <h2>Main page</h2>

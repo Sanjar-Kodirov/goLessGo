@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { BrowseIconSvg, MusicIconSvg } from '@/shared/assets/svg/navigation';
 import { RoutePath } from '@/shared/config/routeConfig/routes';
+import { Button } from '@/shared/ui/Button';
 
 import classes from './Sidebar.module.scss';
-import { Button } from '@/shared/ui/Button';
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -50,13 +50,11 @@ export function Sidebar({ className }: SidebarProps) {
       <div className={classes.menu}>
         {menuData.map((item) => {
           return (
-            <div className={classes.menuItem}>
-              <h2 key={item.key} className={classes.menuTitle}>
-                {item.name}
-              </h2>
+            <div key={item.name} className={classes.menuItem}>
+              <h2 className={classes.menuTitle}>{item.name}</h2>
               {item.sub?.map((sub) => {
                 return (
-                  <Link to={sub.path} state={{ from: sub.path }}>
+                  <Link to={sub.path} key={sub.name} state={{ from: sub.path }}>
                     <Button
                       onClick={() => setActiveLink(sub.path)}
                       variant={activeLink === sub.path ? 'default' : 'ghost'}
