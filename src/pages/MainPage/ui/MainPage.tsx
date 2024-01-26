@@ -39,9 +39,20 @@ const DialogUI = ({ children }: any) => {
 
 const MainPage = () => {
   const getReminders = async () => {
-    const response: any = await fetch('/api/reminders');
-    const data = response;
-    console.log('data', data);
+    const credentials = {
+      username: 'dfdf',
+      password: 'sanjar',
+    };
+
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
+    });
+
+    console.log('response', await response.json());
   };
 
   useEffect(() => {
