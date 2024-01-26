@@ -4,13 +4,3 @@
 .navbarNav {
   @apply container flex items-center justify-between;
 }
-
-.navLins {
-  @apply flex;
-  li {
-    @apply p-2;
-    &:hover {
-      @apply text-primary bg-red-400 rounded-md text-white;
-    }
-  }
-}
