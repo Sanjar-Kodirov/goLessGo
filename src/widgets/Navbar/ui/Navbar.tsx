@@ -1,3 +1,4 @@
+import { ModeToggle } from '@/app/providers/ThemeProvider/ModeToddle';
 import { Button } from '@/shared/ui/Button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/widgets/Avatar';
 
@@ -11,7 +12,10 @@ const Navbar = () => {
           <AvatarImage src="https://github.com/shadcn.png" alt="shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <Button>Logout</Button>
+        <div className="flex gap-2">
+          <Button>Logout</Button>
+          <ModeToggle />
+        </div>
       </div>
     </div>
   );
