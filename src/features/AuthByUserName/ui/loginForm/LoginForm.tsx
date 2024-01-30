@@ -1,0 +1,103 @@
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import * as z from 'zod';
+
+import { memo, useCallback } from 'react';
+
+import { Button } from '@/shared/ui/Button';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/shared/ui/Form/Form';
+import { Input } from '@/shared/ui/Form/Input';
+import Text from '@/shared/ui/Text/Text';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { getLoginState } from '../../model/selectors/getLoginState/getLoginState';
+import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
+import { loginActions } from '../../model/slice/loginSlice';
+
+const formSchema = z.object({
+  username: z.string().min(2, {
+    message: 'Имя пользователя должно содержать как минимум 2 символа.',
+  }),
+  password: z
+    .string()
+    .min(2, { message: 'Пароль должен содержать как минимум 2 символа.' }),
+});
+
+export const LoginForm = memo(() => {
+  const { isLoading, error } = useSelector(getLoginState);
+  const dispatch = useDispatch();
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: '',
+      password: '',
+    },
+  });
+
+  const onSubmit = useCallback(
+    (values: z.infer<typeof formSchema>) => {
+      console.log(values);
+
+      dispatch(
+        // @ts-ignore
+        loginByUsername({
+          password: values.password,
+          username: values.username,
+        }),
+      );
+    },
+    [dispatch],
+  );
+
+  return (
+    <Form {...form}>
+      {error && <Text.Error>{'Произошла ошибка'}</Text.Error>}
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Имя пользователя</FormLabel>
+              <FormControl>
+                <Input placeholder="Введите имя пользователя" {...field} />
+              </FormControl>
+              <FormDescription>
+                Это ваше отображаемое публичное имя.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Пароль</FormLabel>
+              <FormControl>
+                <Input placeholder="Введите парол" {...field} />
+              </FormControl>
+              <FormDescription>
+                Это ваше отображаемое публичное имя.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button disabled={isLoading} type="submit">
+          Submit
+        </Button>
+      </form>
+    </Form>
+  );
+});
