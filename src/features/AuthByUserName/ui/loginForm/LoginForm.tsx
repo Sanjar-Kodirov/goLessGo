@@ -19,7 +19,6 @@ import {
 import { Input } from '@/shared/ui/Form/Input';
 import Text from '@/shared/ui/Text/Text';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { UnknownAction } from '@reduxjs/toolkit';
 
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
 import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
@@ -46,7 +45,7 @@ const LoginForm: FC<TPropsType> = memo((props) => {
   const isLoading = useSelector(getLoginIsLoading);
   const success = useSelector(getLoginSuccess);
   const error = useSelector(getLoginError);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useDynamicModuleLoader('loginForm', loginReducer, false);
 
@@ -68,7 +67,6 @@ const LoginForm: FC<TPropsType> = memo((props) => {
   const onSubmit = useCallback(
     async (values: z.infer<typeof formSchema>) => {
       const result = await dispatch(
-        // @ts-ignore
         loginByUsername({
           password: values.password,
           username: values.username,
