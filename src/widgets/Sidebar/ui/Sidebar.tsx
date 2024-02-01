@@ -2,9 +2,9 @@ import { useMemo, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { cn } from '@/lib/utils';
 import { BrowseIconSvg, MusicIconSvg } from '@/shared/assets/svg/navigation';
 import { RoutePath } from '@/shared/config/routeConfig/routes';
+import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/Button';
 
 import classes from './Sidebar.module.scss';

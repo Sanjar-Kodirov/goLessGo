@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import * as z from 'zod';
 
 import { FC, memo, useCallback, useEffect } from 'react';
 
-import { useDynamicModuleLoader } from '@/shared/hooks/useDynamicModuleLoader';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
 import { Button } from '@/shared/ui/Button';
 import {
   Form,
@@ -18,6 +19,7 @@ import {
 import { Input } from '@/shared/ui/Form/Input';
 import Text from '@/shared/ui/Text/Text';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { UnknownAction } from '@reduxjs/toolkit';
 
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
 import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
@@ -64,10 +66,8 @@ const LoginForm: FC<TPropsType> = memo((props) => {
   }, [onClose, success]);
 
   const onSubmit = useCallback(
-    (values: z.infer<typeof formSchema>) => {
-      console.log(values);
-
-      dispatch(
+    async (values: z.infer<typeof formSchema>) => {
+      const result = await dispatch(
         // @ts-ignore
         loginByUsername({
           password: values.password,

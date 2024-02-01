@@ -9,6 +9,8 @@ import {
 
 export interface StateSchema {
   user: UserSchema;
+
+  // 
   loginForm?: LoginSchema;
 }
 

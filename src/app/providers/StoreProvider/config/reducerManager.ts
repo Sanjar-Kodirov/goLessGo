@@ -28,6 +28,7 @@ export function createReducerManager(
         }
         keysToRemove = [];
       }
+      // @ts-ignore
       return combinedReducer(state, action);
     },
 
