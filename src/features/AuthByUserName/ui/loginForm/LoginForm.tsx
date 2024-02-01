@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import * as z from 'zod';
 
-import { memo, useCallback } from 'react';
+import { FC, memo, useCallback, useEffect } from 'react';
 
 import { Button } from '@/shared/ui/Button';
 import {
@@ -31,8 +31,14 @@ const formSchema = z.object({
     .min(2, { message: 'Пароль должен содержать как минимум 2 символа.' }),
 });
 
-export const LoginForm = memo(() => {
-  const { isLoading, error } = useSelector(getLoginState);
+type TPropsType = {
+  isOpen: boolean;
+  onClose: any;
+};
+
+export const LoginForm: FC<TPropsType> = memo((props) => {
+  const { onClose } = props;
+  const { isLoading, error, success } = useSelector(getLoginState);
   const dispatch = useDispatch();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -42,6 +48,13 @@ export const LoginForm = memo(() => {
       password: '',
     },
   });
+
+  useEffect(() => {
+    if (success) {
+      onClose();
+      alert('Login went successfully');
+    }
+  }, [onClose, success]);
 
   const onSubmit = useCallback(
     (values: z.infer<typeof formSchema>) => {
