@@ -55,7 +55,7 @@ const Navbar = () => {
         </Avatar>
         <div className="flex gap-2">
           <Button onClick={onShowModal}>Войти</Button>
-          <LoginModal isOpen={isAuthModal} onClose={setIsAuthModal} />
+          <LoginModal isOpen={isAuthModal} closeModal={setIsAuthModal} />
           <ModeToggle />
         </div>
       </div>

@@ -14,20 +14,20 @@ import { LoginFormAsync } from '../loginForm/LoginForm.async';
 
 type TPropsType = {
   isOpen: boolean;
-  onClose: any;
+  closeModal: any;
 };
 
 export const LoginModal: FC<TPropsType> = (props) => {
-  const { isOpen, onClose } = props;
+  const { isOpen, closeModal } = props;
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={closeModal}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="mb-4">Вход</DialogTitle>
           <DialogDescription>
             <Suspense fallback={<Loader />}>
-              <LoginFormAsync isOpen={isOpen} onClose={onClose} />
+              <LoginFormAsync isOpen={isOpen} onSuccess={closeModal} />
             </Suspense>
           </DialogDescription>
         </DialogHeader>

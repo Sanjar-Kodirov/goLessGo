@@ -37,17 +37,17 @@ const formSchema = z.object({
 
 type TPropsType = {
   isOpen: boolean;
-  onClose: any;
+  onSuccess: any;
 };
 
 const LoginForm: FC<TPropsType> = memo((props) => {
-  const { onClose } = props;
+  const { onSuccess } = props;
   const isLoading = useSelector(getLoginIsLoading);
   const success = useSelector(getLoginSuccess);
   const error = useSelector(getLoginError);
   const dispatch = useAppDispatch();
 
-  useDynamicModuleLoader('loginForm', loginReducer, false);
+  useDynamicModuleLoader('loginForm', loginReducer);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -57,13 +57,6 @@ const LoginForm: FC<TPropsType> = memo((props) => {
     },
   });
 
-  useEffect(() => {
-    if (success) {
-      onClose();
-      alert('Login went successfully');
-    }
-  }, [onClose, success]);
-
   const onSubmit = useCallback(
     async (values: z.infer<typeof formSchema>) => {
       const result = await dispatch(
@@ -72,6 +65,10 @@ const LoginForm: FC<TPropsType> = memo((props) => {
           username: values.username,
         }),
       );
+
+      if (result.meta.requestStatus === 'fulfilled') {
+        onSuccess();
+      }
     },
     [dispatch],
   );
