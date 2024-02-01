@@ -100,7 +100,7 @@ const LoginForm: FC<TPropsType> = memo((props) => {
             <FormItem>
               <FormLabel>Пароль</FormLabel>
               <FormControl>
-                <Input placeholder="Введите парол" {...field} />
+                <Input type="password" placeholder="Введите парол" {...field} />
               </FormControl>
               <FormDescription>
                 Это ваше отображаемое публичное имя.

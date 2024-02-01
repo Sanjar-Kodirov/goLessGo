@@ -25,6 +25,11 @@ export function makeServer() {
               id: 1,
               username: 'sanjar',
               email: 'sanjar@example.com',
+              username: 'sanjar',
+              age: 24,
+              avatar: 'https://i.pravatar.cc/300',
+              country: 'Uzbekistan',
+              city: 'Tashkent',
             },
           };
         } else {

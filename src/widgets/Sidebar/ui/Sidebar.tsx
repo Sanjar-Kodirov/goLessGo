@@ -2,7 +2,11 @@ import { useMemo, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { BrowseIconSvg, MusicIconSvg } from '@/shared/assets/svg/navigation';
+import {
+  BrowseIconSvg,
+  MusicIconSvg,
+  ProfileIconSvg,
+} from '@/shared/assets/svg/navigation';
 import { RoutePath } from '@/shared/config/routeConfig/routes';
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/Button';
@@ -34,8 +38,15 @@ export function Sidebar({ className }: SidebarProps) {
       },
 
       {
-        name: 'Profile',
+        name: 'Профиль',
         key: RoutePath.main,
+        sub: [
+          {
+            name: 'Профиль',
+            path: RoutePath.profile,
+            icon: <ProfileIconSvg />,
+          },
+        ],
       },
     ];
   }, []);
