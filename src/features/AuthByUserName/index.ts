@@ -1,4 +1,3 @@
 export type { LoginSchema } from './model/types/loginSchema';
-export { LoginForm } from './ui/loginForm/LoginForm';
-export { loginReducer } from './model/slice/loginSlice';
+export { LoginFormAsync as LoginForm } from './ui/loginForm/LoginForm.async';
 export { LoginModal } from './ui/loginModal/LoginModal';

@@ -4,6 +4,7 @@ import * as z from 'zod';
 
 import { FC, memo, useCallback, useEffect } from 'react';
 
+import { useDynamicModuleLoader } from '@/shared/hooks/useDynamicModuleLoader';
 import { Button } from '@/shared/ui/Button';
 import {
   Form,
@@ -18,9 +19,11 @@ import { Input } from '@/shared/ui/Form/Input';
 import Text from '@/shared/ui/Text/Text';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { getLoginState } from '../../model/selectors/getLoginState/getLoginState';
+import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
+import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
+import { getLoginSuccess } from '../../model/selectors/getLoginSuccess/getLoginSuccess';
 import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
-import { loginActions } from '../../model/slice/loginSlice';
+import { loginReducer } from '../../model/slice/loginSlice';
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -36,10 +39,14 @@ type TPropsType = {
   onClose: any;
 };
 
-export const LoginForm: FC<TPropsType> = memo((props) => {
+const LoginForm: FC<TPropsType> = memo((props) => {
   const { onClose } = props;
-  const { isLoading, error, success } = useSelector(getLoginState);
+  const isLoading = useSelector(getLoginIsLoading);
+  const success = useSelector(getLoginSuccess);
+  const error = useSelector(getLoginError);
   const dispatch = useDispatch();
+
+  useDynamicModuleLoader('loginForm', loginReducer, false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -114,3 +121,4 @@ export const LoginForm: FC<TPropsType> = memo((props) => {
     </Form>
   );
 });
+export default LoginForm;

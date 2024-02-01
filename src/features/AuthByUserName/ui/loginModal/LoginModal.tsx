@@ -1,4 +1,6 @@
-import { FC } from 'react';
+import { Loader } from 'lucide-react';
+
+import { FC, Suspense } from 'react';
 
 import {
   Dialog,
@@ -8,7 +10,7 @@ import {
   DialogTitle,
 } from '@/shared/ui/Dialog/Dialog';
 
-import { LoginForm } from '../loginForm/LoginForm';
+import { LoginFormAsync } from '../loginForm/LoginForm.async';
 
 type TPropsType = {
   isOpen: boolean;
@@ -24,7 +26,9 @@ export const LoginModal: FC<TPropsType> = (props) => {
         <DialogHeader>
           <DialogTitle className="mb-4">Вход</DialogTitle>
           <DialogDescription>
-            <LoginForm isOpen={isOpen} onClose={onClose} />
+            <Suspense fallback={<Loader />}>
+              <LoginFormAsync isOpen={isOpen} onClose={onClose} />
+            </Suspense>
           </DialogDescription>
         </DialogHeader>
       </DialogContent>
