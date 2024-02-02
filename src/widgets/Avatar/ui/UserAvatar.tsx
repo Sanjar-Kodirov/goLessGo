@@ -1,6 +1,6 @@
 import { FC, memo } from 'react';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/widgets/Avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 
 type TProps = {
   src: string;
@@ -11,7 +11,7 @@ type TProps = {
 export const UserAvatar: FC<TProps> = memo((props) => {
   const { name, src, alt } = props;
   return (
-    <Avatar>
+    <Avatar className="w-10 h-10 border rounded-full overflow-hidden">
       <AvatarImage src={src} alt={alt ? alt : 'use image'} />
       <AvatarFallback>{name}</AvatarFallback>
     </Avatar>
