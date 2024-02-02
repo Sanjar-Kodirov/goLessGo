@@ -43,7 +43,6 @@ type TPropsType = {
 const LoginForm: FC<TPropsType> = memo((props) => {
   const { onSuccess } = props;
   const isLoading = useSelector(getLoginIsLoading);
-  const success = useSelector(getLoginSuccess);
   const error = useSelector(getLoginError);
   const dispatch = useAppDispatch();
 
@@ -70,7 +69,7 @@ const LoginForm: FC<TPropsType> = memo((props) => {
         onSuccess();
       }
     },
-    [dispatch],
+    [dispatch, onSuccess],
   );
 
   return (

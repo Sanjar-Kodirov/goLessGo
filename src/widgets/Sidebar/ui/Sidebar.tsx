@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ import classes from './Sidebar.module.scss';
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function Sidebar({ className }: SidebarProps) {
+export const Sidebar = memo(({ className }: SidebarProps) => {
   const [activeLink, setActiveLink] = useState<string>('');
   const [collapsed] = useState<boolean>(false);
   const menuData = useMemo(() => {
@@ -50,6 +50,32 @@ export function Sidebar({ className }: SidebarProps) {
       },
     ];
   }, []);
+
+  const itemsList = useMemo(() => {
+    return menuData.map((item) => {
+      return (
+        <div key={item.name} className={classes.menuItem}>
+          <h2 className={classes.menuTitle}>{item.name}</h2>
+          {item.sub?.map((sub) => {
+            return (
+              <Link to={sub.path} key={sub.name} state={{ from: sub.path }}>
+                <Button
+                  onClick={() => setActiveLink(sub.path)}
+                  variant={activeLink === sub.path ? 'default' : 'ghost'}
+                  className="w-full justify-start"
+                  key={sub.path}
+                >
+                  {sub.icon}
+                  {!collapsed && sub.name}
+                </Button>
+              </Link>
+            );
+          })}
+        </div>
+      );
+    });
+  }, [activeLink, collapsed, menuData]);
+
   return (
     <div
       className={cn(
@@ -58,30 +84,7 @@ export function Sidebar({ className }: SidebarProps) {
         className,
       )}
     >
-      <div className={classes.menu}>
-        {menuData.map((item) => {
-          return (
-            <div key={item.name} className={classes.menuItem}>
-              <h2 className={classes.menuTitle}>{item.name}</h2>
-              {item.sub?.map((sub) => {
-                return (
-                  <Link to={sub.path} key={sub.name} state={{ from: sub.path }}>
-                    <Button
-                      onClick={() => setActiveLink(sub.path)}
-                      variant={activeLink === sub.path ? 'default' : 'ghost'}
-                      className="w-full justify-start"
-                      key={sub.path}
-                    >
-                      {sub.icon}
-                      {!collapsed && sub.name}
-                    </Button>
-                  </Link>
-                );
-              })}
-            </div>
-          );
-        })}
-      </div>
+      <div className={classes.menu}>{itemsList}</div>
     </div>
   );
-}
+});
