@@ -1,3 +1,4 @@
+import { IProfileSchema } from '@/entities/Profile';
 import { UserSchema } from '@/entities/User';
 import { LoginSchema } from '@/features/AuthByUserName';
 import {
@@ -10,8 +11,9 @@ import {
 export interface StateSchema {
   user: UserSchema;
 
-  // 
+  // async
   loginForm?: LoginSchema;
+  profile?: IProfileSchema;
 }
 
 export interface ReducerManager {

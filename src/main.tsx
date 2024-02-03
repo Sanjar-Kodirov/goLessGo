@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+import { array } from 'zod';
 
 import Root from './Root';
 import './app/styles/index.scss';

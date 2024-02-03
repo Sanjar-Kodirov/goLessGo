@@ -23,7 +23,6 @@ export function makeServer() {
           return {
             user: {
               id: 1,
-              username: 'sanjar',
               email: 'sanjar@example.com',
               username: 'sanjar',
               age: 24,
