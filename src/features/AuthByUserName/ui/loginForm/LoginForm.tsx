@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form';
-import { useSelector, useStore } from 'react-redux';
+import { useSelector } from 'react-redux';
 import * as z from 'zod';
 
-import { FC, memo, useCallback, useEffect } from 'react';
+import { FC, memo, useCallback } from 'react';
 
-import { ReduxStoreWithManager } from '@/app/providers/StoreProvider/config/StateSchema';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
 import { Button } from '@/shared/ui/Button';
@@ -46,21 +45,6 @@ const LoginForm: FC<TPropsType> = memo((props) => {
   const error = useSelector(getLoginError);
   const dispatch = useAppDispatch();
 
-  //
-  const store = useStore() as ReduxStoreWithManager;
-
-  useEffect(() => {
-    store.reducerManager.add('loginForm', loginReducer);
-    dispatch({ type: `@INIT loginForm reducer` });
-
-    return () => {
-      if (true) {
-        store.reducerManager.remove('loginForm');
-        dispatch({ type: `@DESTROY loginForm reducer` });
-      }
-    };
-  }, [dispatch, store]);
-
   useDynamicModuleLoader('loginForm', loginReducer, true);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -74,6 +58,7 @@ const LoginForm: FC<TPropsType> = memo((props) => {
   const onSubmit = useCallback(
     async (values: z.infer<typeof formSchema>) => {
       const result = await dispatch(
+        // @ts-ignore
         loginByUsername({
           password: values.password,
           username: values.username,

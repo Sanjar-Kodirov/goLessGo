@@ -28,8 +28,7 @@ export function createReducerManager(
         }
         keysToRemove = [];
       }
-      // @ts-ignore
-      return combinedReducer(state, action);
+      return combinedReducer(state as any, action);
     },
 
     add: (key: StateSchemaKey, reducer: Reducer) => {
