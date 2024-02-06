@@ -1,10 +1,10 @@
-export enum ICurrency {
+export enum Currency {
   'RUB' = 'RUB',
   'EUR' = 'EUR',
   'USD' = 'USD',
 }
 
-export enum ICountry {
+export enum Country {
   Russia = 'Russia',
   Belarus = 'Belarus',
   Ukraine = 'Ukraine',

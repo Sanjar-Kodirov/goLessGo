@@ -4,6 +4,7 @@ import { Suspense, useEffect } from 'react';
 
 import { Outlet, useActionData } from 'react-router-dom';
 
+import { StoreProvider } from '@/app/providers/StoreProvider';
 import { userActions } from '@/entities/User';
 import { Navbar } from '@/widgets/Navbar';
 import { Sidebar } from '@/widgets/Sidebar';

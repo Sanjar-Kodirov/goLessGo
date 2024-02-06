@@ -1,11 +1,22 @@
-import { FC } from 'react';
+import { useSelector } from 'react-redux';
 
-import { profileReducer } from '@/entities/Profile';
+import { FC, useEffect } from 'react';
+
+import { fetchProfileData, profileReducer } from '@/entities/Profile';
+import { getProfileData } from '@/entities/Profile/model/selectors/getProfileData/getProfileData';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
 
-type TProps = {};
-const ProfilePage: FC<TProps> = () => {
+const ProfilePage: FC = () => {
+  const dispatch = useAppDispatch();
+  const profileData = useSelector(getProfileData);
+  console.log('profileData', profileData);
   useDynamicModuleLoader('profile', profileReducer, true);
+
+  useEffect(() => {
+    dispatch(fetchProfileData());
+  }, [dispatch]);
+
   return <div>ProfilePage</div>;
 };
 

@@ -1,17 +1,17 @@
-import { ICountry, ICurrency } from '@/shared/const/common';
+import { Country } from '@/shared/const/common';
 
-export interface IProfile {
+export interface Profile {
   id: number;
-  username: string;
   email: string;
+  username: string;
   age: number;
   avatar: string;
-  country: ICountry;
+  country: Country;
   city: string;
 }
 
-export interface IProfileSchema {
-  data?: IProfile;
+export interface ProfileSchema {
+  data?: Profile;
   isLoading: boolean;
   error?: string;
   readonly: boolean;
