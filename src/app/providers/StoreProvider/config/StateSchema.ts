@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 
 import { NavigateOptions, To } from 'react-router-dom';
 
-import { IProfileSchema } from '@/entities/Profile';
+import { ProfileSchema } from '@/entities/Profile';
 import { UserSchema } from '@/entities/User';
 import { LoginSchema } from '@/features/AuthByUserName';
 import {
@@ -17,7 +17,7 @@ export interface StateSchema {
 
   // async
   loginForm?: LoginSchema;
-  profile?: IProfileSchema;
+  profile?: ProfileSchema;
 }
 
 export interface ReducerManager {

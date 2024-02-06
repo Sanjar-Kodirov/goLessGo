@@ -58,7 +58,6 @@ const LoginForm: FC<TPropsType> = memo((props) => {
   const onSubmit = useCallback(
     async (values: z.infer<typeof formSchema>) => {
       const result = await dispatch(
-        // @ts-ignore
         loginByUsername({
           password: values.password,
           username: values.username,

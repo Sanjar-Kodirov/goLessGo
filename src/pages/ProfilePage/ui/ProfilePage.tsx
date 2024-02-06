@@ -8,10 +8,10 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
 
 const ProfilePage: FC = () => {
+  useDynamicModuleLoader('profile', profileReducer, true);
+
   const dispatch = useAppDispatch();
   const profileData = useSelector(getProfileData);
-  console.log('profileData', profileData);
-  useDynamicModuleLoader('profile', profileReducer, true);
 
   useEffect(() => {
     dispatch(fetchProfileData());
