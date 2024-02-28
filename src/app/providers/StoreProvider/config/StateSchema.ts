@@ -14,10 +14,10 @@ import {
 
 export interface StateSchema {
   user: UserSchema;
+  profile: ProfileSchema;
 
   // async
   loginForm?: LoginSchema;
-  profile?: ProfileSchema;
 }
 
 export interface ReducerManager {

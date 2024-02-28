@@ -1,27 +1,119 @@
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+import { z } from 'zod';
 
-import { FC, useEffect } from 'react';
+import { FC, useCallback } from 'react';
 
-import { fetchProfileData, profileReducer } from '@/entities/Profile';
+import { profileReducer } from '@/entities/Profile';
 import { getProfileData } from '@/entities/Profile/model/selectors/getProfileData/getProfileData';
+import { getProfileError } from '@/entities/Profile/model/selectors/getProfileError/getProfileError';
+import { getProfileIsLoading } from '@/entities/Profile/model/selectors/getProfileIsLoading/getProfileIsLoading';
+import { loginByUsername } from '@/features/AuthByUserName/model/services/loginByUsername/loginByUsername';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
+import { Button } from '@/shared/ui/Button';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/shared/ui/Form/Form';
+import { Input } from '@/shared/ui/Form/Input';
+import Text from '@/shared/ui/Text/Text';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+const formSchema = z.object({
+  username: z.string().min(2, {
+    message: 'Имя пользователя должно содержать как минимум 2 символа.',
+  }),
+  password: z
+    .string()
+    .min(2, { message: 'Пароль должен содержать как минимум 2 символа.' }),
+});
 
 const ProfilePage: FC = () => {
-  useDynamicModuleLoader('profile', profileReducer, true);
+  useDynamicModuleLoader('profile', profileReducer, false);
 
-  const form = useForm();
+  const profileData = useSelector(getProfileData);
+  const isLoading = useSelector(getProfileIsLoading);
+  const error = useSelector(getProfileError);
 
   const dispatch = useAppDispatch();
-  const profileData = useSelector(getProfileData);
 
-  useEffect(() => {
-    dispatch(fetchProfileData());
-  }, [dispatch]);
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: '',
+      password: '',
+    },
+  });
+
+  const onSubmit = useCallback(
+    async (values: z.infer<typeof formSchema>) => {
+      const result = await dispatch(
+        loginByUsername({
+          password: values.password,
+          username: values.username,
+        }),
+      );
+
+      if (result.meta.requestStatus === 'fulfilled') {
+        // onSuccess();
+      }
+    },
+    [dispatch],
+  );
 
   return (
     <div>
+      <Form {...form}>
+        {error && <Text.Error>{'Произошла ошибка'}</Text.Error>}
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Имя пользователя</FormLabel>
+                <FormControl>
+                  <Input placeholder="Введите имя пользователя" {...field} />
+                </FormControl>
+                <FormDescription>
+                  Это ваше отображаемое публичное имя.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Пароль</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    placeholder="Введите парол"
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>
+                  Это ваше отображаемое публичное имя.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button disabled={isLoading} type="submit">
+            Submit
+          </Button>
+        </form>
+      </Form>
+
       <main className="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
         <div className="p-2 md:p-4">
           <div className="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">

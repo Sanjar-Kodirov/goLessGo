@@ -3,27 +3,31 @@ import { useDispatch, useSelector } from 'react-redux';
 import { memo, useCallback, useState } from 'react';
 
 import { ModeToggle } from '@/app/providers/ThemeProvider/ModeToddle';
-import { getUserAuthData, userActions } from '@/entities/User';
+import { getProfileData } from '@/entities/Profile/model/selectors/getProfileData/getProfileData';
+import { userActions } from '@/entities/User';
 import { LoginModal } from '@/features/AuthByUserName';
+import { AvatarUI } from '@/shared/ui/Avatar';
 import { Button } from '@/shared/ui/Button';
-import { AvatarUI } from '@/widgets/Avatar';
 
 import classes from './Navbar.module.scss';
+import { profileActions } from '@/entities/Profile';
 
 const Navbar = memo(() => {
-  const authData = useSelector(getUserAuthData);
   const dispatch = useDispatch();
   const [isAuthModal, setIsAuthModal] = useState(false);
+  const profileData = useSelector(getProfileData);
 
   const onShowModal = useCallback(() => {
     setIsAuthModal(true);
   }, []);
 
   const onLogout = useCallback(() => {
-    dispatch(userActions.logout());
+    dispatch(profileActions.logout());
   }, [dispatch]);
 
-  if (authData) {
+  console.log('profiledata', profileData);
+
+  if (profileData) {
     return (
       <div className={classes.navbar}>
         <div className={classes.navbarNav}>

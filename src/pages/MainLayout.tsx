@@ -1,19 +1,17 @@
-import { useDispatch } from 'react-redux';
-
 import { Suspense, useEffect } from 'react';
 
-import { Outlet, useActionData } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
-import { StoreProvider } from '@/app/providers/StoreProvider';
-import { userActions } from '@/entities/User';
+import { fetchProfileData } from '@/entities/Profile';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { Navbar } from '@/widgets/Navbar';
 import { Sidebar } from '@/widgets/Sidebar';
 
 const MainLayout = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(userActions.initAuthData());
+    dispatch(fetchProfileData());
   }, [dispatch]);
 
   return (
@@ -32,3 +30,5 @@ const MainLayout = () => {
 };
 
 export default MainLayout;
+
+// todo: user folder not working at all need to be removed in case of the using

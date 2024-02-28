@@ -1,3 +1,4 @@
+import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { fetchProfileData } from '../services/fetchProfileData/fetchProfileData';
@@ -13,7 +14,15 @@ const initialState: ProfileSchema = {
 export const profileSlice = createSlice({
   name: 'profile',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.data = undefined;
+      localStorage.removeItem(USER_LOCALSTORAGE_KEY);
+    },
+    setReadonly: (state, action: PayloadAction<boolean>) => {
+      state.readonly = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProfileData.pending, (state) => {

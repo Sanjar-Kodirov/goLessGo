@@ -32,9 +32,7 @@ export function makeServer() {
             },
           };
         } else {
-          return {
-            user: null, // Return null or appropriate response for unauthorized access
-          };
+          return new Response(401, {}, { message: 'error' });
         }
       });
 

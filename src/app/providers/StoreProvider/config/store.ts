@@ -1,10 +1,9 @@
-import { NavigateOptions, To } from 'react-router-dom';
-
+import { profileReducer } from '@/entities/Profile';
 import { userReducer } from '@/entities/User';
 import { $api } from '@/shared/api/api';
 import { Reducer, ReducersMapObject, configureStore } from '@reduxjs/toolkit';
 
-import { StateSchema, ThunkExtraArg } from './StateSchema';
+import { StateSchema } from './StateSchema';
 import { createReducerManager } from './reducerManager';
 
 export function createReduxStore(
@@ -14,6 +13,7 @@ export function createReduxStore(
   const rootReducers: ReducersMapObject<StateSchema> = {
     ...asyncReducers,
     user: userReducer,
+    profile: profileReducer,
   };
 
   const reducerManager = createReducerManager(rootReducers);
