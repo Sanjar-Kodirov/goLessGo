@@ -6,7 +6,7 @@ import { ModeToggle } from '@/app/providers/ThemeProvider/ModeToddle';
 import { getUserAuthData, userActions } from '@/entities/User';
 import { LoginModal } from '@/features/AuthByUserName';
 import { Button } from '@/shared/ui/Button';
-import { UserAvatar } from '@/widgets/Avatar';
+import { AvatarUI } from '@/widgets/Avatar';
 
 import classes from './Navbar.module.scss';
 
@@ -27,7 +27,7 @@ const Navbar = memo(() => {
     return (
       <div className={classes.navbar}>
         <div className={classes.navbarNav}>
-          <UserAvatar
+          <AvatarUI
             name="CN"
             src="https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg"
           />
@@ -43,7 +43,7 @@ const Navbar = memo(() => {
   return (
     <div className={classes.navbar}>
       <div className={classes.navbarNav}>
-        <UserAvatar
+        <AvatarUI
           name="CN"
           src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
         />

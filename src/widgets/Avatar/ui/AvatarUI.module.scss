@@ -1,0 +1,19 @@
+.Avatar {
+  @apply border rounded-full overflow-hidden;
+}
+
+.sm {
+  @apply w-6 h-6;
+}
+
+.md {
+  @apply w-10 h-10;
+}
+
+.lg {
+  @apply w-16 h-16;
+}
+
+.xl {
+  @apply w-24 h-24;
+}

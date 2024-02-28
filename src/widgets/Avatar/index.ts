@@ -1,3 +1,3 @@
-import { UserAvatar } from './ui/UserAvatar';
+import { AvatarUI } from './ui/AvatarUI';
 
-export { UserAvatar };
+export { AvatarUI };
