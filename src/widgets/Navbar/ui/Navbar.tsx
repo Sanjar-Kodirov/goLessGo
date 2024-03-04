@@ -25,7 +25,6 @@ const Navbar = memo(() => {
     dispatch(profileActions.logout());
   }, [dispatch]);
 
-  console.log('profiledata', profileData);
 
   if (profileData) {
     return (
