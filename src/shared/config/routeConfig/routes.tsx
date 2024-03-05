@@ -6,6 +6,8 @@ import { MainPage } from '@/pages/MainPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { ProfilePage } from '@/pages/ProfilePage';
 
+import { RequireAuth } from './RequireAuth';
+
 export enum AppRoutes {
   MAIN = 'main',
   ABOUT = 'about',
@@ -36,7 +38,11 @@ export const router = createBrowserRouter([
       },
       {
         path: RoutePath.profile,
-        element: <ProfilePage />,
+        element: (
+          <RequireAuth>
+            <ProfilePage />
+          </RequireAuth>
+        ),
       },
       {
         path: RoutePath.not_found,

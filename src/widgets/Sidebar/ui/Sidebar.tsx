@@ -7,6 +7,7 @@ import {
   MusicIconSvg,
   ProfileIconSvg,
 } from '@/shared/assets/svg/navigation';
+import { RequireAuth } from '@/shared/config/routeConfig/RequireAuth';
 import { RoutePath } from '@/shared/config/routeConfig/routes';
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/Button';
@@ -18,6 +19,7 @@ interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 export const Sidebar = memo(({ className }: SidebarProps) => {
   const [activeLink, setActiveLink] = useState<string>('');
   const [collapsed] = useState<boolean>(false);
+
   const menuData = useMemo(() => {
     return [
       {
@@ -28,11 +30,13 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
             name: 'Main',
             path: RoutePath.main,
             icon: <MusicIconSvg />,
+            isAuth: false,
           },
           {
             name: 'About',
             path: RoutePath.about,
             icon: <BrowseIconSvg />,
+            isAuth: false,
           },
         ],
       },
@@ -45,6 +49,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
             name: 'Профиль',
             path: RoutePath.profile,
             icon: <ProfileIconSvg />,
+            isAuth: true,
           },
         ],
       },
@@ -57,7 +62,21 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
         <div key={item.name} className={classes.menuItem}>
           <h2 className={classes.menuTitle}>{item.name}</h2>
           {item.sub?.map((sub) => {
-            return (
+            return sub.isAuth ? (
+              <RequireAuth>
+                <Link to={sub.path} key={sub.name} state={{ from: sub.path }}>
+                  <Button
+                    onClick={() => setActiveLink(sub.path)}
+                    variant={activeLink === sub.path ? 'default' : 'ghost'}
+                    className="w-full justify-start"
+                    key={sub.path}
+                  >
+                    {sub.icon}
+                    {!collapsed && sub.name}
+                  </Button>
+                </Link>
+              </RequireAuth>
+            ) : (
               <Link to={sub.path} key={sub.name} state={{ from: sub.path }}>
                 <Button
                   onClick={() => setActiveLink(sub.path)}

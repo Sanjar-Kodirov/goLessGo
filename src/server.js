@@ -1,5 +1,11 @@
 import { Response, createServer } from 'miragejs';
 
+const reminders = [
+  { id: 1, text: 'Walk the dog' },
+  { id: 2, text: 'Take out the trash' },
+  { id: 3, text: 'Work out' },
+];
+
 export function makeServer() {
   createServer({
     routes() {
@@ -17,8 +23,6 @@ export function makeServer() {
 
       this.get('/api/current_user', (schema, request) => {
         const token = request.requestHeaders.Authorization.split(' ')[1]; // Extract token from Authorization header
-        // Retrieve user information based on the token
-        // For example:
         if (token === 'yourGeneratedTokenHere') {
           return {
             user: {
@@ -41,11 +45,7 @@ export function makeServer() {
           return new Response(401, {}, { message: 'Unauthorized' });
         }
         return {
-          reminders: [
-            { id: 1, text: 'Walk the dog' },
-            { id: 2, text: 'Take out the trash' },
-            { id: 3, text: 'Work out' },
-          ],
+          reminders,
         };
       });
 
