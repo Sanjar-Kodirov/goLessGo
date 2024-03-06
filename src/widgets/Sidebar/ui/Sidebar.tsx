@@ -3,6 +3,7 @@ import { memo, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
+  ArticleIconSvg,
   BrowseIconSvg,
   MusicIconSvg,
   ProfileIconSvg,
@@ -28,13 +29,19 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
         key: RoutePath.main,
         sub: [
           {
-            name: 'Main',
+            name: 'Главная',
             path: RoutePath.main,
             icon: <MusicIconSvg />,
             isAuth: false,
           },
           {
-            name: 'About',
+            name: 'Статьи',
+            path: RoutePath.articles,
+            icon: <ArticleIconSvg />,
+            isAuth: true,
+          },
+          {
+            name: 'О нас',
             path: RoutePath.about,
             icon: <BrowseIconSvg />,
             isAuth: false,
