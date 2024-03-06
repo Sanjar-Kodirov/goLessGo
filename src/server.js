@@ -33,6 +33,8 @@ export function makeServer() {
               avatar: 'https://i.pravatar.cc/300',
               country: 'Uzbekistan',
               city: 'Tashkent',
+              avatar:
+                'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg',
             },
           };
         } else {

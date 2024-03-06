@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 import { fetchProfileData } from '@/entities/Profile';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+import { Toaster } from '@/shared/ui/Notification/SonnerUI';
 import { Navbar } from '@/widgets/Navbar';
 import { Sidebar } from '@/widgets/Sidebar';
 
@@ -25,6 +26,7 @@ const MainLayout = () => {
           </Suspense>
         </div>
       </div>
+      <Toaster />;
     </div>
   );
 };

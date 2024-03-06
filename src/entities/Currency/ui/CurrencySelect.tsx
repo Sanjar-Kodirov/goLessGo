@@ -1,10 +1,5 @@
-import { FormControl } from '@/shared/ui/Form/Form';
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  SelectItem
 } from '@/shared/ui/Select/Select';
 import { ISelectUIProps, SelectUI } from '@/shared/ui/Select/SelectUI';
 

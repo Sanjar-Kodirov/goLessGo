@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import * as z from 'zod';
 
-import { FC, memo, useCallback } from 'react';
+import { FC, memo } from 'react';
 
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
@@ -55,21 +55,18 @@ const LoginForm: FC<TPropsType> = memo((props) => {
     },
   });
 
-  const onSubmit = useCallback(
-    async (values: z.infer<typeof formSchema>) => {
-      const result = await dispatch(
-        loginByUsername({
-          password: values.password,
-          username: values.username,
-        }),
-      );
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const result = await dispatch(
+      loginByUsername({
+        password: values.password,
+        username: values.username,
+      }),
+    );
 
-      if (result.meta.requestStatus === 'fulfilled') {
-        onSuccess();
-      }
-    },
-    [dispatch, onSuccess],
-  );
+    if (result.meta.requestStatus === 'fulfilled') {
+      onSuccess();
+    }
+  };
 
   return (
     <Form {...form}>

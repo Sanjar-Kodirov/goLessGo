@@ -23,6 +23,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
   const menuData = useMemo(() => {
     return [
       {
+        id: 1,
         name: 'Discover',
         key: RoutePath.main,
         sub: [
@@ -42,6 +43,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
       },
 
       {
+        id: 2,
         name: 'Профиль',
         key: RoutePath.main,
         sub: [
@@ -59,12 +61,12 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
   const itemsList = useMemo(() => {
     return menuData.map((item) => {
       return (
-        <div key={item.name} className={classes.menuItem}>
+        <div key={item.id} className={classes.menuItem}>
           <h2 className={classes.menuTitle}>{item.name}</h2>
           {item.sub?.map((sub) => {
             return sub.isAuth ? (
-              <RequireAuth>
-                <Link to={sub.path} key={sub.name} state={{ from: sub.path }}>
+              <RequireAuth key={sub.name}>
+                <Link to={sub.path} state={{ from: sub.path }}>
                   <Button
                     onClick={() => setActiveLink(sub.path)}
                     variant={activeLink === sub.path ? 'default' : 'ghost'}
@@ -77,7 +79,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
                 </Link>
               </RequireAuth>
             ) : (
-              <Link to={sub.path} key={sub.name} state={{ from: sub.path }}>
+              <Link key={sub.name} to={sub.path} state={{ from: sub.path }}>
                 <Button
                   onClick={() => setActiveLink(sub.path)}
                   variant={activeLink === sub.path ? 'default' : 'ghost'}

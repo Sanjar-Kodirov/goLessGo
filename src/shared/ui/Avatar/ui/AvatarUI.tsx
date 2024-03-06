@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { FC, memo, useMemo } from 'react';
+import { FC, memo } from 'react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 

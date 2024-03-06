@@ -2,7 +2,6 @@ import { Provider } from 'react-redux';
 
 import { ReactNode } from 'react';
 
-import { BrowserRouter, useNavigate } from 'react-router-dom';
 
 import { ReducersMapObject } from '@reduxjs/toolkit';
 

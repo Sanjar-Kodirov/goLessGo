@@ -3,19 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { memo, useCallback, useState } from 'react';
 
 import { ModeToggle } from '@/app/providers/ThemeProvider/ModeToddle';
+import { profileActions } from '@/entities/Profile';
 import { getProfileData } from '@/entities/Profile/model/selectors/getProfileData/getProfileData';
-import { userActions } from '@/entities/User';
+import { getProfileIsLoading } from '@/entities/Profile/model/selectors/getProfileIsLoading/getProfileIsLoading';
 import { LoginModal } from '@/features/AuthByUserName';
 import { AvatarUI } from '@/shared/ui/Avatar';
 import { Button } from '@/shared/ui/Button';
 
 import classes from './Navbar.module.scss';
-import { profileActions } from '@/entities/Profile';
 
 const Navbar = memo(() => {
   const dispatch = useDispatch();
   const [isAuthModal, setIsAuthModal] = useState(false);
   const profileData = useSelector(getProfileData);
+  const isProfileLoading = useSelector(getProfileIsLoading);
 
   const onShowModal = useCallback(() => {
     setIsAuthModal(true);
@@ -25,33 +26,29 @@ const Navbar = memo(() => {
     dispatch(profileActions.logout());
   }, [dispatch]);
 
-
-  if (profileData) {
-    return (
-      <div className={classes.navbar}>
-        <div className={classes.navbarNav}>
-          <AvatarUI
-            name="CN"
-            src="https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg"
-          />
-          <div className="flex gap-2">
-            <Button onClick={onLogout}>Выйти</Button>
-            <ModeToggle />
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const onButtonClick = () => {
+    if (profileData?.user) {
+      onLogout();
+    } else {
+      onShowModal();
+    }
+  };
 
   return (
     <div className={classes.navbar}>
       <div className={classes.navbarNav}>
         <AvatarUI
           name="CN"
-          src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"
+          src={
+            profileData?.user.avatar ||
+            'https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg'
+          }
         />
         <div className="flex gap-2">
-          <Button onClick={onShowModal}>Войти</Button>
+          <Button loading={isProfileLoading} onClick={onButtonClick}>
+            {profileData?.user ? ' Выйти' : 'Войти'}
+          </Button>
+
           <LoginModal isOpen={isAuthModal} closeModal={setIsAuthModal} />
           <ModeToggle />
         </div>

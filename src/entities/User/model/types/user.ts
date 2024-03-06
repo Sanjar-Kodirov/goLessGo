@@ -3,6 +3,10 @@ export interface User {
   username: string;
 }
 
+export interface ILoginResponse {
+  token: string;
+}
+
 export interface UserSchema {
   authData?: User;
 }

@@ -41,6 +41,8 @@ const ProfilePage: FC = () => {
 
   const form = useForm();
 
+  console.log('user', profileData);
+
   useEffect(() => {
     if (profileData?.user) {
       form.reset(profileData.user);
