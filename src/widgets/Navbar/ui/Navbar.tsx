@@ -34,19 +34,22 @@ const Navbar = memo(() => {
     }
   };
 
+  console.log('profileData?.user,', profileData);
+
   return (
     <div className={classes.navbar}>
       <div className={classes.navbarNav}>
         <AvatarUI
           name="CN"
           src={
-            profileData?.user.avatar ||
-            'https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg'
+            profileData?.user.avatar
+              ? profileData?.user.avatar
+              : 'https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg'
           }
         />
         <div className="flex gap-2">
           <Button loading={isProfileLoading} onClick={onButtonClick}>
-            {profileData?.user ? ' Выйти' : 'Войти'}
+            {profileData?.user ? 'Выйти' : 'Войти'}
           </Button>
 
           <LoginModal isOpen={isAuthModal} closeModal={setIsAuthModal} />

@@ -11,6 +11,7 @@ export function RequireAuth({ children }: { children: JSX.Element }) {
   const location = useLocation();
 
   if (!profileData) {
+    console.log('profileData', profileData);
     return <Navigate to={RoutePath.main} state={{ from: location }} replace />;
   }
 

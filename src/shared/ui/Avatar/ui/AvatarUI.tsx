@@ -8,8 +8,9 @@ import cls from './AvatarUI.module.scss';
 
 type TProps = {
   src: string;
-  name: string;
+  name?: string;
   alt?: string;
+  className?: string;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 };
 

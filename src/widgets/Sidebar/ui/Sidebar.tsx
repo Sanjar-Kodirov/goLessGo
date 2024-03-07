@@ -3,7 +3,6 @@ import { memo, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
-  ArticleIconSvg,
   BrowseIconSvg,
   MusicIconSvg,
   ProfileIconSvg,
@@ -12,6 +11,7 @@ import { RequireAuth } from '@/shared/config/routeConfig/RequireAuth';
 import { RoutePath } from '@/shared/config/routeConfig/routes';
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/Button';
+import { FileIcon } from '@radix-ui/react-icons';
 
 import classes from './Sidebar.module.scss';
 
@@ -37,7 +37,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
           {
             name: 'Статьи',
             path: RoutePath.articles,
-            icon: <ArticleIconSvg />,
+            icon: <FileIcon className="h-4 w-4 mr-2" />,
             isAuth: true,
           },
           {

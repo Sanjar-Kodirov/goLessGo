@@ -2,6 +2,7 @@ import { AxiosInstance } from 'axios';
 
 import { NavigateOptions, To } from 'react-router-dom';
 
+import { ArticleDetailsSchema } from '@/entities/Article';
 import { ProfileSchema } from '@/entities/Profile';
 import { UserSchema } from '@/entities/User';
 import { LoginSchema } from '@/features/AuthByUserName';
@@ -15,6 +16,7 @@ import {
 export interface StateSchema {
   user: UserSchema;
   profile: ProfileSchema;
+  articleDetails?: ArticleDetailsSchema;
 
   // async
   loginForm?: LoginSchema;

@@ -2,6 +2,10 @@ import classNames from 'classnames';
 
 import { memo } from 'react';
 
+import { Link } from 'react-router-dom';
+
+import { RoutePath } from '@/shared/config/routeConfig/routes';
+
 import cls from './ArticlesPage.module.scss';
 
 interface ArticlesPageProps {
@@ -14,6 +18,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   return (
     <div className={classNames(cls.ArticlesPage, {}, [className])}>
       ARTICLES PAGE
+      <Link to={RoutePath.article_details + '/1'}>Go to details</Link>
     </div>
   );
 };

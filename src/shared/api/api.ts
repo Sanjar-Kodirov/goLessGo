@@ -33,9 +33,7 @@ $api.interceptors.response.use(
     } else if (status === 403) {
       toast.error('Ошибка');
     } else if (status >= 400) {
-      if (error.response) {
-        toast.error('Ошибка');
-      }
+      toast.error('Ошибка');
     }
 
     return Promise.reject(error);

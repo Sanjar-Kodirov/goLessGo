@@ -1,9 +1,41 @@
 import { Response, createServer } from 'miragejs';
 
-const reminders = [
-  { id: 1, text: 'Walk the dog' },
-  { id: 2, text: 'Take out the trash' },
-  { id: 3, text: 'Work out' },
+import { articles } from './serverDb/articles';
+
+const users = [
+  {
+    id: 1,
+    email: 'sanjar@example.com',
+    username: 'sanjar',
+    age: 24,
+    avatar: 'https://i.pravatar.cc/300',
+    country: 'Uzbekistan',
+    city: 'Tashkent',
+    avatar:
+      'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg',
+  },
+  {
+    id: 2,
+    email: '2@2.com',
+    username: 's',
+    age: 24,
+    avatar: 'https://i.pravatar.cc/300',
+    country: 'Uzbekistan',
+    city: 'Tashkent',
+    avatar:
+      'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg',
+  },
+  {
+    id: 3,
+    email: '3@3.com',
+    username: 's',
+    age: 24,
+    avatar: 'https://i.pravatar.cc/300',
+    country: 'Uzbekistan',
+    city: 'Tashkent',
+    avatar:
+      'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg',
+  },
 ];
 
 export function makeServer() {
@@ -15,7 +47,7 @@ export function makeServer() {
           requestBody.username === 'sanjar' &&
           requestBody.password === 'sanjar'
         ) {
-          return new Response(200, {}, { token: 'yourGeneratedTokenHere' });
+          return new Response(200, {}, { token: '1' });
         } else {
           return new Response(401, {}, { message: 'Invalid credentials' });
         }
@@ -23,32 +55,36 @@ export function makeServer() {
 
       this.get('/api/current_user', (schema, request) => {
         const token = request.requestHeaders.Authorization.split(' ')[1]; // Extract token from Authorization header
-        if (token === 'yourGeneratedTokenHere') {
-          return {
-            user: {
-              id: 1,
-              email: 'sanjar@example.com',
-              username: 'sanjar',
-              age: 24,
-              avatar: 'https://i.pravatar.cc/300',
-              country: 'Uzbekistan',
-              city: 'Tashkent',
-              avatar:
-                'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg',
-            },
-          };
+
+        const user = users.find((user) => user.id == Number(token));
+        console.log('user', user);
+        if (user) {
+          return { user };
         } else {
           return new Response(401, {}, { message: 'error' });
         }
       });
 
-      this.get('/api/reminders', (schema, request) => {
+      this.get('/api/articles', (schema, request) => {
         if (!request.requestHeaders.Authorization) {
           return new Response(401, {}, { message: 'Unauthorized' });
         }
-        return {
-          reminders,
-        };
+        return articles;
+      });
+
+      this.get('/api/articles/:id', (schema, request) => {
+        const articleId = request.params.id;
+        const article = articles.find((item) => item.id == articleId);
+
+        if (!request.requestHeaders.Authorization) {
+          return new Response(401, {}, { message: 'Unauthorized' });
+        }
+
+        if (article) {
+          return article;
+        } else {
+          return new Response(404, {}, { message: 'Article not found' });
+        }
       });
 
       this.post('/api/reminders', (schema, request) => {

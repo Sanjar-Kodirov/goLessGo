@@ -1,0 +1,47 @@
+.error {
+  @apply p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400;
+}
+.h1 {
+  @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+}
+
+.h2 {
+  @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+}
+
+.h3 {
+  @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+}
+
+.h4 {
+  @apply scroll-m-20 text-xl font-semibold tracking-tight;
+}
+
+.p {
+  @apply leading-7 [&:not(:first-child)]:mt-6;
+}
+
+.lead {
+  @apply text-xl text-muted-foreground;
+}
+
+.small {
+  @apply text-sm text-sm font-medium leading-none;
+}
+
+.muted {
+  @apply text-sm text-muted-foreground;
+}
+
+// positioning
+.right {
+  @apply text-right;
+}
+
+.center {
+  @apply text-center;
+}
+
+.left {
+  @apply text-left;
+}

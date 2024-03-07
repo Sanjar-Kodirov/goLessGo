@@ -13,7 +13,7 @@ const MainLayout = () => {
 
   useEffect(() => {
     dispatch(fetchProfileData());
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className=" flex-col h-screen">

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { AboutPage } from '@/pages/AboutPage';
+import { ArticleDetailsPage } from '@/pages/ArticleDetailsPage';
 import { ArticlesPage } from '@/pages/ArticlesPage';
 import MainLayout from '@/pages/MainLayout';
 import { MainPage } from '@/pages/MainPage';
@@ -13,6 +14,7 @@ export enum AppRoutes {
   MAIN = 'main',
   PROFILE = 'profile',
   ARTICLES = 'articles',
+  ARTICLE_DETAILS = 'article_details',
   ABOUT = 'about',
 
   NOT_FOUND = 'not_found',
@@ -22,6 +24,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.MAIN]: '/',
   [AppRoutes.PROFILE]: '/profile',
   [AppRoutes.ARTICLES]: '/articles',
+  [AppRoutes.ARTICLE_DETAILS]: '/articles',
   [AppRoutes.ABOUT]: '/about',
   [AppRoutes.NOT_FOUND]: '*',
 };
@@ -35,12 +38,19 @@ export const router = createBrowserRouter([
         path: RoutePath.main,
         element: <MainPage />,
       },
-
       {
         path: RoutePath.articles,
         element: (
           <RequireAuth>
             <ArticlesPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: `${RoutePath.article_details}/:id`,
+        element: (
+          <RequireAuth>
+            <ArticleDetailsPage />
           </RequireAuth>
         ),
       },
