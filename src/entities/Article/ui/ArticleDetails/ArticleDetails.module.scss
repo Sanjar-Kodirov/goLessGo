@@ -1,37 +1,30 @@
 .ArticleDetails {
-  min-height: 100%;
-}
-
-.avatar {
-  margin: 0 auto;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-}
-
-.title {
-  margin-top: 20px;
-}
-
-.skeleton {
-  margin-top: 15px;
-}
-
-.articleInfo {
-  display: flex;
-  align-items: center;
-}
-
-.icon {
-  margin-right: 8px;
+  @apply min-h-full;
 }
 
 .avatarWrapper {
-  display: flex;
-  width: 100%;
-  justify-content: center;
+  @apply flex justify-center w-full;
+}
+.avatar {
+  @apply mx-auto w-32 h-32 rounded-full;
+}
+
+.title {
+  @apply w-full h-10 mt-4;
+}
+
+.skeleton {
+  @apply w-full h-96 mt-4;
+}
+
+.articleInfo {
+  @apply flex items-center;
+}
+
+.icon {
+  @apply mr-2;
 }
 
 .block {
-  margin-top: 16px;
+  @apply mr-4 w-full;
 }

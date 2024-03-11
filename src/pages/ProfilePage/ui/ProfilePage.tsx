@@ -18,7 +18,7 @@ import {
   FormMessage,
 } from '@/shared/ui/Form/Form';
 import { Input } from '@/shared/ui/Form/Input';
-import Text from '@/shared/ui/Text/Text';
+import Text, { TextTheme } from '@/shared/ui/Text/Text';
 
 import classes from './ProfilePage.module.scss';
 
@@ -56,7 +56,7 @@ const ProfilePage: FC = () => {
   return (
     <main className={classes.profileMain}>
       <Form {...form}>
-        {error && <Text.Error>{'Произошла ошибка'}</Text.Error>}
+        {error && <Text text="Произошла ошибка" theme={TextTheme.ERROR} />}
         <div className="p-2 md:p-4">
           <div className="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
             <h2 className="pl-6 text-2xl font-bold sm:text-xl">Профиль</h2>

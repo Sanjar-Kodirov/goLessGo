@@ -21,7 +21,7 @@ export const Code = memo((props: CodeProps) => {
 
   return (
     <pre className={classNames(cls.Code, {}, [className])}>
-      <div className="relative max-w-2xl mx-auto mt-24">
+      <div className="relative max-w-2xl mx-auto">
         <div className="bg-gray-900 text-white p-4 rounded-md">
           <div className="flex justify-between items-center mb-2">
             <span className="text-gray-400">Code:</span>

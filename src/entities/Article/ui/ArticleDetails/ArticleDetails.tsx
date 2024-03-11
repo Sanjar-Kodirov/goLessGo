@@ -6,6 +6,8 @@ import { memo, useCallback, useEffect } from 'react';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
 import { AvatarUI } from '@/shared/ui/Avatar';
+import Divider from '@/shared/ui/Divider/Divider';
+import { Skeleton } from '@/shared/ui/Skeleton/Skeleton';
 import Text, { TextTheme, TextType } from '@/shared/ui/Text/Text';
 import { CalendarIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 
@@ -31,11 +33,16 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
   const { className, id } = props;
 
   useDynamicModuleLoader('articleDetails', articleDetailsReducer, true);
+
   const dispatch = useAppDispatch();
 
   const isLoading = useSelector(getArticleDetailsIsLoading);
   const article = useSelector(getArticleDetailsData);
   const error = useSelector(getArticleDetailsError);
+
+  useEffect(() => {
+    dispatch(fetchArticleById(id));
+  }, [dispatch, id]);
 
   const renderBlock = useCallback((block: ArticleBlock) => {
     switch (block.type) {
@@ -68,25 +75,16 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
     }
   }, []);
 
-  useEffect(() => {
-    dispatch(fetchArticleById(id));
-  }, [dispatch, id]);
-
   let content;
 
   if (isLoading) {
     content = (
       <>
-        {/* <Skeleton
-          className={cls.avatar}
-          width={200}
-          height={200}
-          border="50%"
-        />
-        <Skeleton className={cls.title} width={300} height={32} />
-        <Skeleton className={cls.skeleton} width={600} height={24} />
-        <Skeleton className={cls.skeleton} width="100%" height={200} />
-        <Skeleton className={cls.skeleton} width="100%" height={200} /> */}
+        <Skeleton className={cls.avatar} />
+        <Skeleton className={cls.title} />
+        <Skeleton className={cls.skeleton} />
+        <Skeleton className={cls.skeleton} />
+        <Skeleton className={cls.skeleton} />
       </>
     );
   } else if (error) {
@@ -126,6 +124,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
   return (
     <div className={classNames(cls.ArticleDetails, {}, [className])}>
       {content}
+      <Divider />
     </div>
   );
 });
