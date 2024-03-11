@@ -15,4 +15,5 @@ export interface ProfileSchema {
   isLoading: boolean;
   error?: string;
   readonly: boolean;
+  _inited: boolean;
 }

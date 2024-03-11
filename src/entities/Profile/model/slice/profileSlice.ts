@@ -9,6 +9,7 @@ const initialState: ProfileSchema = {
   isLoading: false,
   error: undefined,
   data: undefined,
+  _inited: false,
 };
 
 export const profileSlice = createSlice({
@@ -34,11 +35,13 @@ export const profileSlice = createSlice({
         (state, action: PayloadAction<Profile>) => {
           state.isLoading = false;
           state.data = action.payload;
+          state._inited = true;
         },
       )
       .addCase(fetchProfileData.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload as string;
+        state._inited = true;
       });
   },
 });

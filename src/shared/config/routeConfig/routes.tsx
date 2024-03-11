@@ -2,13 +2,15 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { AboutPage } from '@/pages/AboutPage';
 import { ArticleDetailsPage } from '@/pages/ArticleDetailsPage';
-import { ArticlesPage } from '@/pages/ArticlesPage';
+import ArticlesPage from '@/pages/ArticlesPage/ui/ArticlesPage/ArticlesPage';
 import MainLayout from '@/pages/MainLayout';
 import { MainPage } from '@/pages/MainPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { ProfilePage } from '@/pages/ProfilePage';
 
 import { RequireAuth } from './RequireAuth';
+
+// import { ArticlesPage } from '@/pages/ArticlesPage';
 
 export enum AppRoutes {
   MAIN = 'main',

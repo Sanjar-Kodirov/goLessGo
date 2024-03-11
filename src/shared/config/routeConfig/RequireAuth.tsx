@@ -6,13 +6,24 @@ import { getProfileData } from '@/entities/Profile/model/selectors/getProfileDat
 
 import { RoutePath } from './routes';
 
-export function RequireAuth({ children }: { children: JSX.Element }) {
+export function RequireAuth({
+  redirect = true,
+  children,
+}: {
+  redirect?: boolean;
+  children: JSX.Element;
+}) {
   const profileData = useSelector(getProfileData);
   const location = useLocation();
 
-  if (!profileData) {
-    console.log('profileData', profileData);
-    return <Navigate to={RoutePath.main} state={{ from: location }} replace />;
+  if (!profileData?.user) {
+    if (redirect) {
+      return (
+        <Navigate to={RoutePath.main} state={{ from: location }} replace />
+      );
+    }
+
+    return null;
   }
 
   return children;

@@ -34,8 +34,6 @@ const Navbar = memo(() => {
     }
   };
 
-  console.log('profileData?.user,', profileData);
-
   return (
     <div className={classes.navbar}>
       <div className={classes.navbarNav}>
