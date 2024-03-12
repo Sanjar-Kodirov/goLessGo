@@ -30,6 +30,7 @@ type FormSchema = {
   email: string;
   id: number;
   username: string;
+  currency: string;
 };
 
 const ProfilePage: FC = () => {
@@ -39,9 +40,7 @@ const ProfilePage: FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const form = useForm();
-
-  console.log('user', profileData);
+  const form = useForm<FormSchema>();
 
   useEffect(() => {
     if (profileData?.user) {
@@ -51,6 +50,15 @@ const ProfilePage: FC = () => {
 
   const onSubmit = (values: FormSchema) => {
     console.log('form', values);
+
+    if (profileData?.user) {
+      dispatch(
+        getProfileData({
+          ...profileData.user,
+          ...values,
+        }),
+      );
+    }
   };
 
   return (
@@ -62,8 +70,7 @@ const ProfilePage: FC = () => {
             <h2 className="pl-6 text-2xl font-bold sm:text-xl">Профиль</h2>
 
             <form
-              // @ts-ignore
-              onSubmit={form.handleSubmit(onSubmit)}
+              onSubmit={() => form.handleSubmit(onSubmit)}
               className="space-y-8"
             >
               <div className={classes.formItemsContainer}>

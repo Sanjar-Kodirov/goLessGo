@@ -48,5 +48,3 @@ const MainLayout = () => {
 };
 
 export default MainLayout;
-
-// todo: user folder not working at all need to be removed in case of the using

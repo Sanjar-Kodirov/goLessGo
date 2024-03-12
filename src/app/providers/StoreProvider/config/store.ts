@@ -1,5 +1,4 @@
 import { profileReducer } from '@/entities/Profile';
-import { userReducer } from '@/entities/User';
 import { $api } from '@/shared/api/api';
 import { Reducer, ReducersMapObject, configureStore } from '@reduxjs/toolkit';
 
@@ -12,7 +11,6 @@ export function createReduxStore(
 ) {
   const rootReducers: ReducersMapObject<StateSchema> = {
     ...asyncReducers,
-    user: userReducer,
     profile: profileReducer,
   };
 

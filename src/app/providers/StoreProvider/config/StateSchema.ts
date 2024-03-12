@@ -14,7 +14,6 @@ import {
 } from '@reduxjs/toolkit';
 
 export interface StateSchema {
-  user: UserSchema;
   profile: ProfileSchema;
   articleDetails?: ArticleDetailsSchema;
 

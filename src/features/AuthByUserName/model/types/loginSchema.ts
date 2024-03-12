@@ -5,3 +5,12 @@ export interface LoginSchema {
   error?: string;
   success?: boolean;
 }
+
+export interface ILoginResponse {
+  token: string;
+}
+
+export interface User {
+  id: string;
+  username: string;
+}

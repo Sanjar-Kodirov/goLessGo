@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from '@/shared/ui/Form/Form';
 import { Input } from '@/shared/ui/Form/Input';
-import Text from '@/shared/ui/Text/Text';
+import Text, { TextTheme } from '@/shared/ui/Text/Text';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
@@ -70,7 +70,7 @@ const LoginForm: FC<TPropsType> = memo((props) => {
 
   return (
     <Form {...form}>
-      {error && <Text.Error>{'Произошла ошибка'}</Text.Error>}
+      {error && <Text theme={TextTheme.ERROR} text="Произошла ошибка" />}
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}

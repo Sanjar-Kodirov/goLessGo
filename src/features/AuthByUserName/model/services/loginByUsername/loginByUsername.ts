@@ -1,10 +1,9 @@
 import { ThunkConfig } from '@/app/providers/StoreProvider/config/StateSchema';
 import { fetchProfileData } from '@/entities/Profile';
-import { User } from '@/entities/User';
 import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { ILoginResponse } from './../../../../../entities/User/model/types/user';
+import { ILoginResponse, User } from '../../types/loginSchema';
 
 interface LoginByUsernameProps {
   username: string;
