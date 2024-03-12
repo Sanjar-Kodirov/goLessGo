@@ -9,8 +9,3 @@ export interface LoginSchema {
 export interface ILoginResponse {
   token: string;
 }
-
-export interface User {
-  id: string;
-  username: string;
-}

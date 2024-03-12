@@ -23,11 +23,7 @@ const MainLayout = () => {
     dispatch(fetchProfileData());
   }, []);
 
-  if (!profileInited) {
-    return null;
-  }
-
-  if (profileIsLoading) {
+  if (!profileInited || profileIsLoading) {
     return <h1>Loading...</h1>;
   }
 

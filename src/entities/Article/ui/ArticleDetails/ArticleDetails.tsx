@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { CalendarIcon, EyeIcon } from 'lucide-react';
 import { useSelector } from 'react-redux';
 
 import { memo, useCallback, useEffect } from 'react';
@@ -9,7 +10,6 @@ import { AvatarUI } from '@/shared/ui/Avatar';
 import Divider from '@/shared/ui/Divider/Divider';
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton';
 import Text, { TextTheme, TextType } from '@/shared/ui/Text/Text';
-import { CalendarIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 
 import {
   getArticleDetailsData,
@@ -109,12 +109,12 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
           type={TextType.H2}
         />
         <div className={cls.articleInfo}>
-          <EyeOpenIcon />
-          <Text text={String(article?.views)} />
+          <EyeIcon className={cls.icon} />
+          <Text type={TextType.MUTED} text={String(article?.views)} />
         </div>
         <div className={cls.articleInfo}>
           <CalendarIcon className={cls.icon} />
-          <Text text={article?.createdAt} />
+          <Text type={TextType.MUTED} text={article?.createdAt} />
         </div>
         {article?.blocks.map(renderBlock)}
       </>

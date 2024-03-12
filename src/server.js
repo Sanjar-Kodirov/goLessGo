@@ -2,7 +2,7 @@ import { Response, createServer } from 'miragejs';
 
 import { articles } from './serverDb/articles';
 
-const users = [
+const usersP = [
   {
     id: 1,
     email: 'sanjar@example.com',
@@ -56,7 +56,7 @@ export function makeServer() {
       this.get('/api/current_user', (schema, request) => {
         const token = request.requestHeaders.Authorization.split(' ')[1]; // Extract token from Authorization header
 
-        const user = users.find((user) => user.id == Number(token));
+        const user = usersP.find((user) => user.id == Number(token));
         console.log('user', user);
         if (user) {
           return { user };
@@ -84,6 +84,21 @@ export function makeServer() {
           return article;
         } else {
           return new Response(404, {}, { message: 'Article not found' });
+        }
+      });
+
+      this.get('/api/comments/:id', (schema, request) => {
+        const commentId = request.params.id;
+        const comment = comments.find((item) => item.id == articleId);
+
+        if (!request.requestHeaders.Authorization) {
+          return new Response(401, {}, { message: 'Unauthorized' });
+        }
+
+        if (article) {
+          return comment;
+        } else {
+          return new Response(404, {}, { message: 'Comment not found' });
         }
       });
 

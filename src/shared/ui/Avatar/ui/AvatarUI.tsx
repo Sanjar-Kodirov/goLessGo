@@ -15,10 +15,13 @@ type TProps = {
 };
 
 export const AvatarUI: FC<TProps> = memo((props) => {
-  const { name, src, alt, size = 'md' } = props;
+  const { name, src, alt, size = 'md', className, ...rest } = props;
 
   return (
-    <Avatar className={classNames(cls.Avatar, [cls[size]])} {...props}>
+    <Avatar
+      className={classNames(cls.Avatar, [cls[size]], className)}
+      {...rest}
+    >
       <AvatarImage src={src} alt={alt ? alt : 'use image'} />
       <AvatarFallback>{name}</AvatarFallback>
     </Avatar>

@@ -18,11 +18,11 @@
 }
 
 .articleInfo {
-  @apply flex items-center;
+  @apply flex items-center p-2;
 }
 
 .icon {
-  @apply mr-2;
+  @apply mr-2 w-5 h-5 text-gray-600;
 }
 
 .block {

@@ -29,6 +29,14 @@
   @apply text-sm text-sm font-medium leading-none;
 }
 
+.large {
+  @apply text-lg font-semibold;
+}
+
+.bold {
+  @apply font-bold;
+}
+
 .muted {
   @apply text-sm text-muted-foreground;
 }

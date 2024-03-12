@@ -21,7 +21,9 @@ export enum TextType {
   P = 'p',
   LEAD = 'lead',
   SMALL = 'small',
+  LARGE = 'large',
   MUTED = 'muted',
+  BOLD = 'bold',
 }
 
 interface TextProps {
