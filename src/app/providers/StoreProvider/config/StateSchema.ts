@@ -4,8 +4,8 @@ import { NavigateOptions, To } from 'react-router-dom';
 
 import { ArticleDetailsSchema } from '@/entities/Article';
 import { ProfileSchema } from '@/entities/Profile';
-import { UserSchema } from '@/entities/User';
 import { LoginSchema } from '@/features/AuthByUserName';
+import { ArticleDetailsCommentsSchema } from '@/pages/ArticleDetailsPage/model/types/ArticleDetailsCommentsSchema';
 import {
   EnhancedStore,
   Reducer,
@@ -15,10 +15,11 @@ import {
 
 export interface StateSchema {
   profile: ProfileSchema;
-  articleDetails?: ArticleDetailsSchema;
 
   // async
   loginForm?: LoginSchema;
+  articleDetails?: ArticleDetailsSchema;
+  articleDetailsComments?: ArticleDetailsCommentsSchema;
 }
 
 export interface ReducerManager {

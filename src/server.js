@@ -1,6 +1,7 @@
 import { Response, createServer } from 'miragejs';
 
 import { articles } from './serverDb/articles';
+import { comments } from './serverDb/common';
 
 const usersP = [
   {
@@ -84,6 +85,18 @@ export function makeServer() {
           return article;
         } else {
           return new Response(404, {}, { message: 'Article not found' });
+        }
+      });
+
+      this.get('/api/comments', (schema, request) => {
+        if (!request.requestHeaders.Authorization) {
+          return new Response(401, {}, { message: 'Unauthorized' });
+        }
+
+        if (comments) {
+          return comments;
+        } else {
+          return new Response(404, {}, { message: 'Comment not found' });
         }
       });
 

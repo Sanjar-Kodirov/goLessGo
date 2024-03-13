@@ -1,13 +1,25 @@
 import classNames from 'classnames';
+import { useSelector } from 'react-redux';
 
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
 
 import { ArticleDetails } from '@/entities/Article';
 import { CommentList } from '@/entities/Comment';
-import Text, { TextTheme, TextType } from '@/shared/ui/Text/Text';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
+import Text, { TextType } from '@/shared/ui/Text/Text';
 
+import {
+  getArticleCommentsError,
+  getArticleCommentsIsLoading,
+} from '../../model/selectors/comments';
+import { fetchCommentsByArticleId } from '../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
+import {
+  articleDetailsCommentsReducer,
+  getArticleComments,
+} from '../../model/slices/articleDetailsCommentsSlice';
 import cls from './ArticleDetailsPage.module.scss';
 
 interface ArticleDetailsPageProps {
@@ -17,6 +29,26 @@ interface ArticleDetailsPageProps {
 const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
   const { className } = props;
   const { id } = useParams<{ id: string }>();
+
+  const dispatch = useAppDispatch();
+
+  const comments = useSelector(getArticleComments.selectAll);
+  const isCommentLoading = useSelector(getArticleCommentsIsLoading);
+  const commentError = useSelector(getArticleCommentsError);
+
+  console.log('comments', comments);
+
+  useDynamicModuleLoader(
+    'articleDetailsComments',
+    articleDetailsCommentsReducer,
+    true,
+  );
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchCommentsByArticleId(id));
+    }
+  }, []);
 
   if (!id) {
     return (
@@ -30,37 +62,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
     <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
       <ArticleDetails id={id} />
       <Text type={TextType.H4} text="Комментарии" />
-      <CommentList
-        comments={[
-          {
-            id: 1,
-            text: "Very cool! I'll have to learn more about Tailwind.",
-            user: {
-              id: 1,
-              username: 'Iktiyor',
-              avatar: 'https://i.pravatar.cc/300',
-            },
-          },
-          {
-            id: 2,
-            text: "Very cool! I'll have to learn more about Tailwind.",
-            user: {
-              id: 1,
-              username: 'Dilshod',
-              avatar: 'https://i.pravatar.cc/300',
-            },
-          },
-          {
-            id: 3,
-            text: "Very cool! I'll have to learn more about Tailwind.",
-            user: {
-              id: 1,
-              username: 'Qodirali',
-              avatar: 'https://i.pravatar.cc/300',
-            },
-          },
-        ]}
-      />
+      <CommentList isLoading={isCommentLoading} comments={comments} />
     </div>
   );
 };

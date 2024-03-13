@@ -35,7 +35,7 @@ export const CommentCard = memo((props: CommentCardProps) => {
   return (
     <div className={classNames(cls.CommentCard, {}, [className])}>
       <div className={classNames(cls.commentInner)}>
-        {comment.user.avatar ? (
+        {comment.user?.avatar ? (
           <AvatarUI size="md" className="mr-2" src={comment.user.avatar} />
         ) : null}
         <div className={cls.commentText}>
