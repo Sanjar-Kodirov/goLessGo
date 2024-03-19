@@ -19,6 +19,15 @@ const MainLayout = () => {
   const profileIsLoading = useSelector(getProfileIsLoading);
   const profileInited = useSelector(getProfileInited);
 
+  const fetchData = async () => {
+    const response = await fetch('/api/articles');
+    const data = await response.json();
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   useEffect(() => {
     dispatch(fetchProfileData());
   }, []);

@@ -1,17 +1,19 @@
 import { ThunkConfig } from '@/app/providers/StoreProvider/config/StateSchema';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { Article } from '../../types/article';
+import { ArticleDetailsResponseModel } from '../../types/article';
 
 export const fetchArticleById = createAsyncThunk<
-  Article,
+  ArticleDetailsResponseModel,
   string,
   ThunkConfig<string>
 >('articleDetails/fetchArticleById', async (articleId, thunkApi) => {
   const { extra, rejectWithValue } = thunkApi;
 
   try {
-    const response = await extra.api.get<Article>(`/api/articles/${articleId}`);
+    const response = await extra.api.get<ArticleDetailsResponseModel>(
+      `/api/articles/${articleId}`,
+    );
 
     if (!response.data) {
       throw new Error();

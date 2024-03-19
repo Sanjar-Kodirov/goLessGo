@@ -3,7 +3,7 @@ import { fetchProfileData } from '@/entities/Profile';
 import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localStorage';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { ILoginResponse, User } from '../../types/loginSchema';
+import { ILoginResponse } from '../../types/loginSchema';
 
 interface LoginByUsernameProps {
   username: string;
@@ -11,10 +11,9 @@ interface LoginByUsernameProps {
 }
 
 export const loginByUsername = createAsyncThunk<
-  User,
+  ILoginResponse,
   LoginByUsernameProps,
   ThunkConfig<string>
-  // @ts-ignore
 >('login/loginByUsername', async (authData, thunkApi) => {
   const { extra, rejectWithValue, dispatch } = thunkApi;
 

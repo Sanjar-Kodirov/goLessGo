@@ -38,6 +38,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
 
   const isLoading = useSelector(getArticleDetailsIsLoading);
   const article = useSelector(getArticleDetailsData);
+
   const error = useSelector(getArticleDetailsError);
 
   useEffect(() => {
@@ -116,7 +117,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
           <CalendarIcon className={cls.icon} />
           <Text type={TextType.MUTED} text={article?.createdAt} />
         </div>
-        {article?.blocks.map(renderBlock)}
+        {article?.blocks?.map(renderBlock)}
       </>
     );
   }

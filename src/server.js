@@ -1,4 +1,4 @@
-import { Response, createServer } from 'miragejs';
+import { Model, Response, createServer } from 'miragejs';
 
 import { articles } from './serverDb/articles';
 import { comments } from './serverDb/common';
@@ -41,6 +41,17 @@ const usersP = [
 
 export function makeServer() {
   createServer({
+    models: {
+      article: Model,
+      comment: Model,
+      user: Model,
+    },
+
+    seeds(server) {
+      articles.forEach((article) => server.create('article', article));
+      comments.forEach((comment) => server.create('comment', comment));
+      usersP.forEach((user) => server.create('user', user));
+    },
     routes() {
       this.post('/api/login', (schema, request) => {
         let requestBody = JSON.parse(request.requestBody);
@@ -58,7 +69,6 @@ export function makeServer() {
         const token = request.requestHeaders.Authorization.split(' ')[1]; // Extract token from Authorization header
 
         const user = usersP.find((user) => user.id == Number(token));
-        console.log('user', user);
         if (user) {
           return { user };
         } else {
@@ -67,15 +77,16 @@ export function makeServer() {
       });
 
       this.get('/api/articles', (schema, request) => {
-        if (!request.requestHeaders.Authorization) {
-          return new Response(401, {}, { message: 'Unauthorized' });
-        }
-        return articles;
+        // if (!request.requestHeaders.Authorization) {
+        //   return new Response(401, {}, { message: 'Unauthorized' });
+        // }
+        return schema.article.all();
       });
 
       this.get('/api/articles/:id', (schema, request) => {
         const articleId = request.params.id;
-        const article = articles.find((item) => item.id == articleId);
+
+        const article = schema.articles.find(articleId);
 
         if (!request.requestHeaders.Authorization) {
           return new Response(401, {}, { message: 'Unauthorized' });
@@ -94,7 +105,7 @@ export function makeServer() {
         }
 
         if (comments) {
-          return comments;
+          return schema.comments.all();
         } else {
           return new Response(404, {}, { message: 'Comment not found' });
         }

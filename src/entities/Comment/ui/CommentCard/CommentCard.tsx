@@ -40,7 +40,7 @@ export const CommentCard = memo((props: CommentCardProps) => {
         ) : null}
         <div className={cls.commentText}>
           <div className={cls.commentTitle}>
-            <Text type={TextType.BOLD} text={comment.user.username} />
+            <Text type={TextType.BOLD} text={comment.user?.username} />
             <span>3 days ago</span>
           </div>
           <div className={cls.text}>

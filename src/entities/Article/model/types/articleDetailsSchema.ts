@@ -1,7 +1,7 @@
-import { Article } from "./article";
+import { ArticleDetailsResponseModel } from './article';
 
 export interface ArticleDetailsSchema {
-    isLoading: boolean;
-    error?: string;
-    data?: Article;
+  isLoading: boolean;
+  error?: string;
+  data?: ArticleDetailsResponseModel;
 }
