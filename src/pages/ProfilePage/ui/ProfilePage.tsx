@@ -49,8 +49,6 @@ const ProfilePage: FC = () => {
   }, [profileData]);
 
   const onSubmit = (values: FormSchema) => {
-    console.log('form', values);
-
     if (profileData?.user) {
       dispatch(
         getProfileData({

@@ -1,12 +1,14 @@
+import axios from 'axios';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
-import { memo, useEffect } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
 
 import { ArticleDetails } from '@/entities/Article';
 import { CommentList } from '@/entities/Comment';
+import { AddCommentForm } from '@/features/addCommentForm';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
 import Text, { TextType } from '@/shared/ui/Text/Text';
@@ -15,6 +17,7 @@ import {
   getArticleCommentsError,
   getArticleCommentsIsLoading,
 } from '../../model/selectors/comments';
+import { addCommentForArticle } from '../../model/services/addCommentForArticle/addCommentForArticle';
 import { fetchCommentsByArticleId } from '../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
 import {
   articleDetailsCommentsReducer,
@@ -34,15 +37,32 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
 
   const comments = useSelector(getArticleComments.selectAll);
   const isCommentLoading = useSelector(getArticleCommentsIsLoading);
-  const commentError = useSelector(getArticleCommentsError);
-
-  console.log('comments', comments);
 
   useDynamicModuleLoader(
     'articleDetailsComments',
     articleDetailsCommentsReducer,
     true,
   );
+
+  // const onSendComment = useCallback(
+  //   (text: string) => {
+  //     dispatch(addCommentForArticle(text));
+  //   },
+  //   [dispatch],
+  // );
+
+  const onSendComment = (text: string) => {
+    if (!text || !id) {
+      return;
+    }
+    dispatch(
+      addCommentForArticle({
+        text,
+        articleId: id,
+        user: 1,
+      }),
+    );
+  };
 
   useEffect(() => {
     if (id) {
@@ -62,7 +82,9 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
     <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
       <ArticleDetails id={id} />
       <Text type={TextType.H4} text="Комментарии" />
-      <CommentList isLoading={isCommentLoading} comments={comments} />
+      <AddCommentForm onSendComment={onSendComment} />
+      {/* @ts-ignore */}
+      <CommentList isLoading={isCommentLoading} comments={comments[0]} />
     </div>
   );
 };

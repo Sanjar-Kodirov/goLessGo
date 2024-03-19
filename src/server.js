@@ -49,7 +49,7 @@ export function makeServer() {
 
     seeds(server) {
       articles.forEach((article) => server.create('article', article));
-      comments.forEach((comment) => server.create('comment', comment));
+      comments.map((comment) => server.create('comment', comment));
       usersP.forEach((user) => server.create('user', user));
     },
     routes() {
@@ -84,13 +84,10 @@ export function makeServer() {
       });
 
       this.get('/api/articles/:id', (schema, request) => {
+        checkAuth(schema, request);
         const articleId = request.params.id;
 
         const article = schema.articles.find(articleId);
-
-        if (!request.requestHeaders.Authorization) {
-          return new Response(401, {}, { message: 'Unauthorized' });
-        }
 
         if (article) {
           return article;
@@ -100,24 +97,24 @@ export function makeServer() {
       });
 
       this.get('/api/comments', (schema, request) => {
-        if (!request.requestHeaders.Authorization) {
-          return new Response(401, {}, { message: 'Unauthorized' });
-        }
+        checkAuth(schema, request);
 
-        if (comments) {
-          return schema.comments.all();
-        } else {
-          return new Response(404, {}, { message: 'Comment not found' });
-        }
+        return schema.comments.all();
+      });
+
+      this.post('/api/comments', (schema, request) => {
+        checkAuth(schema, request);
+
+        let attrs = JSON.parse(request.requestBody);
+
+        return schema.comments.create(attrs);
       });
 
       this.get('/api/comments/:id', (schema, request) => {
         const commentId = request.params.id;
         const comment = comments.find((item) => item.id == articleId);
 
-        if (!request.requestHeaders.Authorization) {
-          return new Response(401, {}, { message: 'Unauthorized' });
-        }
+        checkAuth(schema, request);
 
         if (article) {
           return comment;
@@ -127,9 +124,8 @@ export function makeServer() {
       });
 
       this.post('/api/reminders', (schema, request) => {
-        if (!request.requestHeaders.Authorization) {
-          return new Response(401, {}, { message: 'Unauthorized' });
-        }
+        checkAuth(schema, request);
+
         let newId = 4;
         let attrs = JSON.parse(request.requestBody);
         attrs.id = newId++;
@@ -138,3 +134,9 @@ export function makeServer() {
     },
   });
 }
+
+const checkAuth = (schema, request) => {
+  if (!request.requestHeaders.Authorization) {
+    return new Response(401, {}, { message: 'Unauthorized' });
+  }
+};

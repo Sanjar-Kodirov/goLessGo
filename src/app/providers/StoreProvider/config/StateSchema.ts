@@ -5,6 +5,7 @@ import { NavigateOptions, To } from 'react-router-dom';
 import { ArticleDetailsSchema } from '@/entities/Article';
 import { ProfileSchema } from '@/entities/Profile';
 import { LoginSchema } from '@/features/AuthByUserName';
+import { AddCommentFormSchema } from '@/features/addCommentForm';
 import { ArticleDetailsCommentsSchema } from '@/pages/ArticleDetailsPage/model/types/ArticleDetailsCommentsSchema';
 import {
   EnhancedStore,
@@ -20,6 +21,7 @@ export interface StateSchema {
   loginForm?: LoginSchema;
   articleDetails?: ArticleDetailsSchema;
   articleDetailsComments?: ArticleDetailsCommentsSchema;
+  addCommentForm?: AddCommentFormSchema;
 }
 
 export interface ReducerManager {
