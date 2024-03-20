@@ -19,7 +19,7 @@ const AddCommentForm = memo((props: AddCommentFormProps) => {
 
   const onSendHandler = useCallback(() => {
     onSendComment(text || '');
-    // setText('');
+    setText('');
   }, [onSendComment, text]);
 
   const onCommentTextChange = useCallback((value: string) => {
@@ -34,7 +34,7 @@ const AddCommentForm = memo((props: AddCommentFormProps) => {
         value={text}
         placeholder="Введите текст комментария"
       />
-      <Button className={cls.button} onClick={onSendHandler}>
+      <Button className={cls.button} disabled={!text} onClick={onSendHandler}>
         Отправить
       </Button>
     </div>

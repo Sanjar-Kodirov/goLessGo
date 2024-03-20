@@ -1,4 +1,3 @@
-import axios from 'axios';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
@@ -13,10 +12,7 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
 import Text, { TextType } from '@/shared/ui/Text/Text';
 
-import {
-  getArticleCommentsError,
-  getArticleCommentsIsLoading,
-} from '../../model/selectors/comments';
+import { getArticleCommentsIsLoading } from '../../model/selectors/comments';
 import { addCommentForArticle } from '../../model/services/addCommentForArticle/addCommentForArticle';
 import { fetchCommentsByArticleId } from '../../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
 import {
@@ -44,25 +40,21 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
     true,
   );
 
-  // const onSendComment = useCallback(
-  //   (text: string) => {
-  //     dispatch(addCommentForArticle(text));
-  //   },
-  //   [dispatch],
-  // );
-
-  const onSendComment = (text: string) => {
-    if (!text || !id) {
-      return;
-    }
-    dispatch(
-      addCommentForArticle({
-        text,
-        articleId: id,
-        user: 1,
-      }),
-    );
-  };
+  const onSendComment = useCallback(
+    (text: string) => {
+      if (!text || !id) {
+        return;
+      }
+      dispatch(
+        addCommentForArticle({
+          text,
+          articleId: id,
+          user: 1,
+        }),
+      );
+    },
+    [dispatch],
+  );
 
   useEffect(() => {
     if (id) {

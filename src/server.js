@@ -1,11 +1,17 @@
-import { Model, Response, createServer } from 'miragejs';
+import {
+  Model,
+  Response,
+  RestSerializer,
+  createServer,
+  hasMany,
+} from 'miragejs';
 
 import { articles } from './serverDb/articles';
 import { comments } from './serverDb/common';
 
 const usersP = [
   {
-    id: 1,
+    id: '1',
     email: 'sanjar@example.com',
     username: 'sanjar',
     age: 24,
@@ -16,7 +22,7 @@ const usersP = [
       'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg',
   },
   {
-    id: 2,
+    id: '2',
     email: '2@2.com',
     username: 's',
     age: 24,
@@ -27,7 +33,7 @@ const usersP = [
       'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg',
   },
   {
-    id: 3,
+    id: '3',
     email: '3@3.com',
     username: 's',
     age: 24,
@@ -41,10 +47,17 @@ const usersP = [
 
 export function makeServer() {
   createServer({
+    serializers: {
+      application: RestSerializer,
+      comments: RestSerializer.extend({
+        include: ['user', 'article'],
+        embed: true,
+      }),
+    },
     models: {
+      user: Model,
       article: Model,
       comment: Model,
-      user: Model,
     },
 
     seeds(server) {
@@ -77,9 +90,8 @@ export function makeServer() {
       });
 
       this.get('/api/articles', (schema, request) => {
-        // if (!request.requestHeaders.Authorization) {
-        //   return new Response(401, {}, { message: 'Unauthorized' });
-        // }
+        checkAuth(schema, request);
+
         return schema.article.all();
       });
 
@@ -106,17 +118,20 @@ export function makeServer() {
         checkAuth(schema, request);
 
         let attrs = JSON.parse(request.requestBody);
+        const user = schema.users.find(attrs.user);
 
-        return schema.comments.create(attrs);
+        console.log('articleId', user.attrs);
+
+        return schema.comments.create({ ...attrs, user: user.attrs });
       });
 
       this.get('/api/comments/:id', (schema, request) => {
-        const commentId = request.params.id;
-        const comment = comments.find((item) => item.id == articleId);
-
         checkAuth(schema, request);
 
-        if (article) {
+        const articleId = request.params.id;
+        const comment = schema.comments.find({ articleId });
+
+        if (comment) {
           return comment;
         } else {
           return new Response(404, {}, { message: 'Comment not found' });
