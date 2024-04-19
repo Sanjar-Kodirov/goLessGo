@@ -1,3 +1,4 @@
+import { CircleUser, FileText, Globe, Music } from 'lucide-react';
 import { useSelector } from 'react-redux';
 
 import { memo, useState } from 'react';
@@ -5,16 +6,16 @@ import { memo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getProfileData } from '@/entities/Profile/model/selectors/getProfileData/getProfileData';
-import {
-  BrowseIconSvg,
-  MusicIconSvg,
-  ProfileIconSvg,
-} from '@/shared/assets/svg/navigation';
 import { RequireAuth } from '@/shared/config/routeConfig/RequireAuth';
 import { RoutePath } from '@/shared/config/routeConfig/routes';
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/Button';
-import { FileIcon } from '@radix-ui/react-icons';
+import {
+  FileTextIcon,
+  HomeIcon,
+  PersonIcon,
+  RocketIcon,
+} from '@radix-ui/react-icons';
 
 import classes from './Sidebar.module.scss';
 
@@ -35,19 +36,19 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
         {
           name: 'Главная',
           path: RoutePath.main,
-          icon: <MusicIconSvg />,
+          icon: <HomeIcon className={classes.icon} />,
           isAuth: false,
         },
         {
           name: 'Статьи',
           path: RoutePath.articles,
-          icon: <FileIcon className="h-4 w-4 mr-2" />,
+          icon: <FileTextIcon className={classes.icon} />,
           isAuth: true,
         },
         {
           name: 'О нас',
           path: RoutePath.about,
-          icon: <BrowseIconSvg />,
+          icon: <RocketIcon className={classes.icon} />,
           isAuth: false,
         },
       ],
@@ -61,7 +62,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
         {
           name: 'Профиль',
           path: RoutePath.profile,
-          icon: <ProfileIconSvg />,
+          icon: <PersonIcon className={classes.icon} />,
           isAuth: true,
         },
       ],
@@ -82,7 +83,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
                   className="w-full justify-start"
                   key={sub.path}
                 >
-                  {sub.icon}
+                  <div className={classes.iconContainer}>{sub.icon}</div>
                   {!collapsed && sub.name}
                 </Button>
               </Link>
@@ -95,7 +96,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
                 className="w-full justify-start"
                 key={sub.path}
               >
-                {sub.icon}
+                <div className={classes.iconContainer}> {sub.icon}</div>
                 {!collapsed && sub.name}
               </Button>
             </Link>
