@@ -8,42 +8,7 @@ import {
 
 import { articles } from './serverDb/articles';
 import { comments } from './serverDb/common';
-
-const usersP = [
-  {
-    id: '1',
-    email: 'sanjar@example.com',
-    username: 'sanjar',
-    age: 24,
-    avatar: 'https://i.pravatar.cc/300',
-    country: 'Uzbekistan',
-    city: 'Tashkent',
-    avatar:
-      'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg',
-  },
-  {
-    id: '2',
-    email: '2@2.com',
-    username: 's',
-    age: 24,
-    avatar: 'https://i.pravatar.cc/300',
-    country: 'Uzbekistan',
-    city: 'Tashkent',
-    avatar:
-      'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg',
-  },
-  {
-    id: '3',
-    email: '3@3.com',
-    username: 's',
-    age: 24,
-    avatar: 'https://i.pravatar.cc/300',
-    country: 'Uzbekistan',
-    city: 'Tashkent',
-    avatar:
-      'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671122.jpg',
-  },
-];
+import { usersP } from './serverDb/users';
 
 export function makeServer() {
   createServer({
@@ -57,6 +22,7 @@ export function makeServer() {
     models: {
       user: Model,
       article: Model,
+      articles: Model,
       comment: Model,
     },
 
@@ -92,7 +58,8 @@ export function makeServer() {
       this.get('/api/articles', (schema, request) => {
         checkAuth(schema, request);
 
-        return schema.article.all();
+        // return schema.article.all();
+        return articles;
       });
 
       this.get('/api/articles/:id', (schema, request) => {

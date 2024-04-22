@@ -5,7 +5,7 @@ import { NavigateOptions, To } from 'react-router-dom';
 import { ArticleDetailsSchema } from '@/entities/Article';
 import { ProfileSchema } from '@/entities/Profile';
 import { LoginSchema } from '@/features/AuthByUserName';
-import { AddCommentFormSchema } from '@/features/addCommentForm';
+// import { AddCommentFormSchema } from '@/features/addCommentForm';
 import { ArticleDetailsCommentsSchema } from '@/pages/ArticleDetailsPage/model/types/ArticleDetailsCommentsSchema';
 import {
   EnhancedStore,
@@ -13,6 +13,7 @@ import {
   ReducersMapObject,
   UnknownAction,
 } from '@reduxjs/toolkit';
+import { ArticlesPageSchema } from '@/pages/ArticlesPage/model/types/articlesPageSchema';
 
 export interface StateSchema {
   profile: ProfileSchema;
@@ -21,7 +22,8 @@ export interface StateSchema {
   loginForm?: LoginSchema;
   articleDetails?: ArticleDetailsSchema;
   articleDetailsComments?: ArticleDetailsCommentsSchema;
-  addCommentForm?: AddCommentFormSchema;
+  // addCommentForm?: AddCommentFormSchema;
+  articlesPage?: ArticlesPageSchema;
 }
 
 export interface ReducerManager {

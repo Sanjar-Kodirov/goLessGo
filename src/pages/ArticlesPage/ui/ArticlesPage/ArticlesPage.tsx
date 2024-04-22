@@ -1,11 +1,25 @@
 import classNames from 'classnames';
+import { useSelector } from 'react-redux';
 
-import { memo } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 
-import { Link } from 'react-router-dom';
+import { ArticleView } from '@/entities/Article/model/types/article';
+import { ArticleList } from '@/entities/Article/ui/ArticleList/ArticleList';
+import { ArticleViewSelector } from '@/entities/Article/ui/ArticleViewSelector/ArticleViewSelector';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
 
-import { RoutePath } from '@/shared/config/routeConfig/routes';
-
+import {
+  getArticlesPageError,
+  getArticlesPageIsLoading,
+  getArticlesPageView,
+} from '../../model/selectors/articlesPageSelectors';
+import { fetchArticlesList } from '../../model/services/fetchArticlesList/fetchArticlesList';
+import {
+  articlesPageActions,
+  articlesPageReducer,
+  getArticles,
+} from '../../model/slices/articlesPageSlice';
 import cls from './ArticlesPage.module.scss';
 
 interface ArticlesPageProps {
@@ -14,11 +28,30 @@ interface ArticlesPageProps {
 
 const ArticlesPage = (props: ArticlesPageProps) => {
   const { className } = props;
+  const dispatch = useAppDispatch();
+  const articles = useSelector(getArticles.selectAll);
+  const isLoading = useSelector(getArticlesPageIsLoading);
+  const view = useSelector(getArticlesPageView);
+  const error = useSelector(getArticlesPageError);
+
+  const onChangeView = useCallback(
+    (view: ArticleView) => {
+      dispatch(articlesPageActions.setView(view));
+    },
+    [dispatch],
+  );
+
+  useEffect(() => {
+    dispatch(fetchArticlesList());
+    dispatch(articlesPageActions.initState());
+  }, []);
+
+  useDynamicModuleLoader('articlesPage', articlesPageReducer);
 
   return (
     <div className={classNames(cls.ArticlesPage, {}, [className])}>
-      ARTICLES PAGE
-      <Link to={RoutePath.article_details + '/1'}>Go to details</Link>
+      <ArticleViewSelector view={view} onViewClick={onChangeView} />
+      <ArticleList isLoading={isLoading} view={view} articles={articles} />
     </div>
   );
 };
