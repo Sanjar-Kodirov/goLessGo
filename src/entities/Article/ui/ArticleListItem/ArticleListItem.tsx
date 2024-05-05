@@ -47,7 +47,9 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
       (block) => block.type === ArticleBlockType.TEXT,
     ) as ArticleTextBlock;
 
-    return article.user.avatar && <AvatarUI src={article.user.avatar} />;
+    return (
+      article.user.avatar && <AvatarUI size="sm" src={article.user.avatar} />
+    );
   }
 
   return (

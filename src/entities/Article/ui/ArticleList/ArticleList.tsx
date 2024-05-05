@@ -2,6 +2,8 @@ import classNames from 'classnames';
 
 import { memo } from 'react';
 
+import { AvatarUI } from '@/shared/ui/Avatar';
+
 import { Article, ArticleView } from '../../model/types/article';
 import { ArticleListItem } from '../ArticleListItem/ArticleListItem';
 import { ArticleListItemSkeleton } from '../ArticleListItem/ArticleListItemSkeleton';
@@ -43,6 +45,9 @@ export const ArticleList = memo((props: ArticleListProps) => {
 
   return (
     <div className={classNames(cls.ArticleList, {}, [className, cls[view]])}>
+      <div style={{ height: '10px' }}>
+        <AvatarUI src="https://i.pravatar.cc" />
+      </div>
       {articles.length > 0 ? articles.map(renderArticle) : null}
     </div>
   );
