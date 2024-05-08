@@ -10,8 +10,6 @@ import { ProfilePage } from '@/pages/ProfilePage';
 
 import { RequireAuth } from './RequireAuth';
 
-// import { ArticlesPage } from '@/pages/ArticlesPage';
-
 export enum AppRoutes {
   MAIN = 'main',
   PROFILE = 'profile',

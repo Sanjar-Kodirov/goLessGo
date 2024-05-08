@@ -1,11 +1,7 @@
-import { CircleUser, FileText, Globe, Music } from 'lucide-react';
-import { useSelector } from 'react-redux';
-
 import { memo, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { getProfileData } from '@/entities/Profile/model/selectors/getProfileData/getProfileData';
 import { RequireAuth } from '@/shared/config/routeConfig/RequireAuth';
 import { RoutePath } from '@/shared/config/routeConfig/routes';
 import { cn } from '@/shared/lib/utils';
@@ -24,8 +20,6 @@ interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 export const Sidebar = memo(({ className }: SidebarProps) => {
   const [activeLink, setActiveLink] = useState<string>('');
   const [collapsed] = useState<boolean>(false);
-
-  const profileData = useSelector(getProfileData);
 
   const menuData = [
     {

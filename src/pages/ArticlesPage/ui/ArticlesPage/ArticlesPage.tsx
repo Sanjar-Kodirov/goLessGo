@@ -10,7 +10,6 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
 
 import {
-  getArticlesPageError,
   getArticlesPageIsLoading,
   getArticlesPageView,
 } from '../../model/selectors/articlesPageSelectors';
@@ -32,7 +31,6 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   const articles = useSelector(getArticles.selectAll);
   const isLoading = useSelector(getArticlesPageIsLoading);
   const view = useSelector(getArticlesPageView);
-  const error = useSelector(getArticlesPageError);
 
   const onChangeView = useCallback(
     (view: ArticleView) => {
@@ -50,7 +48,9 @@ const ArticlesPage = (props: ArticlesPageProps) => {
 
   return (
     <div className={classNames(cls.ArticlesPage, {}, [className])}>
-      <ArticleViewSelector view={view} onViewClick={onChangeView} />
+      <div className="flex justify-end">
+        <ArticleViewSelector view={view} onViewClick={onChangeView} />
+      </div>
       <ArticleList isLoading={isLoading} view={view} articles={articles} />
     </div>
   );

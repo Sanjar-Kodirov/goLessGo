@@ -40,8 +40,8 @@ export enum ArticleType {
 }
 
 export enum ArticleView {
-  BIG = 'BIG',
-  SMALL = 'SMALL',
+  COLUMN = 'COLUMN',
+  GRID = 'GRID',
 }
 
 export interface Article {

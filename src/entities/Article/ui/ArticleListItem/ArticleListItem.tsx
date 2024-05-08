@@ -6,9 +6,15 @@ import { useNavigate } from 'react-router-dom';
 
 import { RoutePath } from '@/shared/config/routeConfig/routes';
 import { AvatarUI } from '@/shared/ui/Avatar';
-import { Button } from '@/shared/ui/Button';
-import Card from '@/shared/ui/Card/Card';
-import Text from '@/shared/ui/Text/Text';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/shared/ui/Card/CardUI';
+import Text, { TextAlign } from '@/shared/ui/Text/Text';
 import { EyeOpenIcon } from '@radix-ui/react-icons';
 
 import {
@@ -17,7 +23,6 @@ import {
   ArticleTextBlock,
   ArticleView,
 } from '../../model/types/article';
-import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
 import cls from './ArticleListItem.module.scss';
 
 interface ArticleListItemProps {
@@ -42,13 +47,43 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
     </>
   );
 
-  if (view === ArticleView.BIG) {
+  if (view === ArticleView.COLUMN) {
     const textBlock = article.blocks.find(
       (block) => block.type === ArticleBlockType.TEXT,
     ) as ArticleTextBlock;
 
     return (
-      article.user.avatar && <AvatarUI size="sm" src={article.user.avatar} />
+      <Card>
+        <CardHeader className={cls.header}>
+          <div className="flex justify-between items-center mb-2">
+            {article.user.avatar && (
+              <AvatarUI
+                size="sm"
+                src={article.user.avatar}
+                name={article.user.username}
+              />
+            )}
+            <div>{article.createdAt}</div>
+          </div>
+          <CardTitle>{article.title} </CardTitle>
+          <CardDescription>{article.subtitle}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="h-[300px] overflow-hidden " data-testid="[200px]:">
+            <img
+              className="object-cover h-full w-full"
+              alt="article image"
+              src={article.img}
+            />
+          </div>
+          <Text
+            align={TextAlign.LEFT}
+            text={textBlock.paragraphs.join(' ').slice(0, 150)}
+            className={cls.textBlock}
+          />
+        </CardContent>
+        <CardFooter></CardFooter>
+      </Card>
     );
   }
 

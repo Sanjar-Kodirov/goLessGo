@@ -16,12 +16,12 @@ interface ArticleViewSelectorProps {
 
 const viewTypes = [
   {
-    view: ArticleView.SMALL,
-    icon: ViewGridIcon,
+    view: ArticleView.GRID,
+    icon: <ViewGridIcon className={cls.icon} />,
   },
   {
-    view: ArticleView.BIG,
-    icon: ListBulletIcon,
+    view: ArticleView.COLUMN,
+    icon: <ListBulletIcon className={cls.icon} />,
   },
 ];
 
@@ -33,21 +33,15 @@ export const ArticleViewSelector = memo((props: ArticleViewSelectorProps) => {
   };
 
   return (
-    <div className={classNames(cls.ArticleViewSelector, {}, [className])}>
-      {viewTypes.map((viewType) => (
-        <Button variant="destructive" onClick={onClick(viewType.view)}>
-          {/* <Icon */}
-          {/* Svg={viewType.icon}
-          className=
-          {classNames('', {
-            [cls.notSelected]: viewType.view !== view,
-          })} */}
-          {/* /> */}
-          <viewType.icon
-            className={classNames('', {
-              [cls.notSelected]: viewType.view !== view,
-            })}
-          />
+    <div className={classNames(cls.articleViewSelector, {}, [className])}>
+      {viewTypes.map(({ view: viewTypeView, icon }) => (
+        <Button
+          key={viewTypeView}
+          variant={view === viewTypeView ? 'destructive' : 'secondary'}
+          size="icon"
+          onClick={onClick(viewTypeView)}
+        >
+          {icon}
         </Button>
       ))}
     </div>

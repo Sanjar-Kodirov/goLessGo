@@ -84,7 +84,7 @@ export const articles = [
     id: '2',
     title: 'Go news',
     subtitle: 'Что нового в JS за 2022 год?',
-    img: 'https://teknotower.com/wp-content/uploads/2020/11/js.png',
+    img: 'https://miro.medium.com/v2/resize:fit:1400/1*LyZcwuLWv2FArOumCxobpA.png',
     views: 1022,
     createdAt: '26.02.2022',
     type: ['IT'],
