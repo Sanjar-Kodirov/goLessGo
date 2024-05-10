@@ -40,15 +40,15 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   );
 
   useEffect(() => {
-    dispatch(fetchArticlesList());
     dispatch(articlesPageActions.initState());
+    dispatch(fetchArticlesList());
   }, []);
 
   useDynamicModuleLoader('articlesPage', articlesPageReducer);
 
   return (
     <div className={classNames(cls.ArticlesPage, {}, [className])}>
-      <div className="flex justify-end">
+      <div className="flex justify-end mb-4">
         <ArticleViewSelector view={view} onViewClick={onChangeView} />
       </div>
       <ArticleList isLoading={isLoading} view={view} articles={articles} />

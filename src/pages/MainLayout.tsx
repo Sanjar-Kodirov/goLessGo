@@ -28,11 +28,11 @@ const MainLayout = () => {
   }
 
   return (
-    <div className=" flex-col h-screen">
+    <div className="flex-col h-screen">
       <Navbar />
       <div className="flex h-screen">
         <Sidebar />
-        <div className="grow p-4">
+        <div className="grow p-4" style={{ width: 'calc(100% - 200px)' }}>
           <Suspense fallback={<div>Loading...</div>}>
             <Outlet />
           </Suspense>

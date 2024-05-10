@@ -5,15 +5,14 @@ import { NavigateOptions, To } from 'react-router-dom';
 import { ArticleDetailsSchema } from '@/entities/Article';
 import { ProfileSchema } from '@/entities/Profile';
 import { LoginSchema } from '@/features/AuthByUserName';
-// import { AddCommentFormSchema } from '@/features/addCommentForm';
 import { ArticleDetailsCommentsSchema } from '@/pages/ArticleDetailsPage/model/types/ArticleDetailsCommentsSchema';
+import { ArticlesPageSchema } from '@/pages/ArticlesPage/model/types/articlesPageSchema';
 import {
   EnhancedStore,
   Reducer,
   ReducersMapObject,
   UnknownAction,
 } from '@reduxjs/toolkit';
-import { ArticlesPageSchema } from '@/pages/ArticlesPage/model/types/articlesPageSchema';
 
 export interface StateSchema {
   profile: ProfileSchema;

@@ -25,7 +25,7 @@ const articlesPageSlice = createSlice({
     error: undefined,
     ids: [],
     entities: {},
-    view: ArticleView.SMALL,
+    view: ArticleView.GRID,
   }),
   reducers: {
     setView: (state, action: PayloadAction<ArticleView>) => {
@@ -33,9 +33,11 @@ const articlesPageSlice = createSlice({
       localStorage.setItem(ARTICLES_VIEW_LOCALSTORAGE_KEY, action.payload);
     },
     initState: (state) => {
-      state.view = localStorage.getItem(
+      const view = localStorage.getItem(
         ARTICLES_VIEW_LOCALSTORAGE_KEY,
       ) as ArticleView;
+
+      state.view = view;
     },
   },
   extraReducers: (builder) => {

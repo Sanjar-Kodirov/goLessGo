@@ -57,5 +57,5 @@ export interface Article {
 }
 
 export interface ArticleDetailsResponseModel {
-  article: Article;
+  articles: Article;
 }

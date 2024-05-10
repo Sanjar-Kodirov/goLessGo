@@ -1,11 +1,11 @@
-import classNames from 'classnames';
-
 import { memo, useCallback } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
 import { RoutePath } from '@/shared/config/routeConfig/routes';
 import { AvatarUI } from '@/shared/ui/Avatar';
+import { BadgeUI } from '@/shared/ui/Badge/BadgeUI';
+import { Button } from '@/shared/ui/Button';
 import {
   Card,
   CardContent,
@@ -14,7 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/ui/Card/CardUI';
-import Text, { TextAlign } from '@/shared/ui/Text/Text';
+import Text from '@/shared/ui/Text/Text';
 import { EyeOpenIcon } from '@radix-ui/react-icons';
 
 import {
@@ -23,6 +23,7 @@ import {
   ArticleTextBlock,
   ArticleView,
 } from '../../model/types/article';
+import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
 import cls from './ArticleListItem.module.scss';
 
 interface ArticleListItemProps {
@@ -36,10 +37,9 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
   const navigate = useNavigate();
 
   const onOpenArticle = useCallback(() => {
-    navigate(RoutePath.article_details + article.id);
+    navigate(`${RoutePath.article_details}/${article.id}`);
   }, [article.id, navigate]);
 
-  const types = <Text text={article.type.join(', ')} className={cls.types} />;
   const views = (
     <>
       <Text text={String(article.views)} className={cls.views} />
@@ -53,9 +53,9 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
     ) as ArticleTextBlock;
 
     return (
-      <Card>
+      <Card className={cls.card}>
         <CardHeader className={cls.header}>
-          <div className="flex justify-between items-center mb-2">
+          <div className={cls.cardHeader}>
             {article.user.avatar && (
               <AvatarUI
                 size="sm"
@@ -69,39 +69,41 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
           <CardDescription>{article.subtitle}</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="h-[300px] overflow-hidden " data-testid="[200px]:">
-            <img
-              className="object-cover h-full w-full"
-              alt="article image"
-              src={article.img}
-            />
+          <div className={cls.cardImage}>
+            <img alt="article image" src={article.img} />
           </div>
-          <Text
-            align={TextAlign.LEFT}
-            text={textBlock.paragraphs.join(' ').slice(0, 150)}
+          <ArticleTextBlockComponent
+            block={textBlock}
             className={cls.textBlock}
           />
+          ...
         </CardContent>
-        <CardFooter></CardFooter>
+        <CardFooter>
+          <Button onClick={onOpenArticle}>Читать дальше...</Button>
+        </CardFooter>
       </Card>
     );
   }
 
   return (
-    <div
-      className={classNames(cls.ArticleListItem, {}, [className, cls[view]])}
-    >
-      {/* <Card className={cls.card} onClick={onOpenArticle}>
-        <div className={cls.imageWrapper}>
-          <img alt={article.title} src={article.img} className={cls.img} />
-          <Text text={article.createdAt} className={cls.date} />
-        </div>
-        <div className={cls.infoWrapper}>
-          {types}
-          {views}
-        </div>
+    <Card className={cls.cardSmall} onClick={onOpenArticle}>
+      <img
+        alt={article.title}
+        className={cls.cardSmallImage}
+        src={article.img}
+      />
+      <CardContent>
         <Text text={article.title} className={cls.title} />
-      </Card> */}
-    </div>
+        <CardDescription className={cls.subtitle}>
+          {article.subtitle}
+        </CardDescription>
+      </CardContent>
+      <CardFooter>
+        <div className="flex items-center gap-1 mr-auto text-sm">{views}</div>
+        {article.type.map((type) => (
+          <BadgeUI variant={'outline'}>{type}</BadgeUI>
+        ))}
+      </CardFooter>
+    </Card>
   );
 });
