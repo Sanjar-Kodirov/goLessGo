@@ -1,10 +1,4 @@
-import {
-  Model,
-  Response,
-  RestSerializer,
-  createServer,
-  hasMany,
-} from 'miragejs';
+import { Model, Response, RestSerializer, createServer } from 'miragejs';
 
 import { articles } from './serverDb/articles';
 import { comments } from './serverDb/common';
@@ -58,8 +52,22 @@ export function makeServer() {
       this.get('/api/articles', (schema, request) => {
         checkAuth(schema, request);
 
-        // return schema.article.all();
-        return articles;
+        const { _page = 1, _limit = 5 } = request.queryParams;
+
+        const articles = schema.articles
+          .all()
+          .slice((_page - 1) * _limit, _page * _limit);
+        return {
+          articles,
+          pagination: {
+            total: schema.articles.all().length,
+            page: parseInt(_page, 10),
+            limit: parseInt(_limit, 10),
+          },
+        };
+
+        // return schema.articles.all();
+        // return articles;
       });
 
       this.get('/api/articles/:id', (schema, request) => {

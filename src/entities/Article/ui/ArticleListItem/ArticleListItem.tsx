@@ -101,7 +101,9 @@ export const ArticleListItem = memo((props: ArticleListItemProps) => {
       <CardFooter>
         <div className="flex items-center gap-1 mr-auto text-sm">{views}</div>
         {article.type.map((type) => (
-          <BadgeUI variant={'outline'}>{type}</BadgeUI>
+          <BadgeUI key={type} variant={'outline'}>
+            {type}
+          </BadgeUI>
         ))}
       </CardFooter>
     </Card>

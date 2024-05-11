@@ -41,7 +41,11 @@ const ArticlesPage = (props: ArticlesPageProps) => {
 
   useEffect(() => {
     dispatch(articlesPageActions.initState());
-    dispatch(fetchArticlesList());
+    dispatch(
+      fetchArticlesList({
+        page: 2,
+      }),
+    );
   }, []);
 
   useDynamicModuleLoader('articlesPage', articlesPageReducer);

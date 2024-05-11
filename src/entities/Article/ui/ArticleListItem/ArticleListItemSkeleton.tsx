@@ -1,21 +1,12 @@
-import classNames from 'classnames';
-
 import { memo } from 'react';
 
-import { ArticleTextBlockComponent } from '@/entities/Article/ui/ArticleTextBlockComponent/ArticleTextBlockComponent';
-import { AvatarUI } from '@/shared/ui/Avatar';
-import { BadgeUI } from '@/shared/ui/Badge/BadgeUI';
-import { Button } from '@/shared/ui/Button';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from '@/shared/ui/Card/CardUI';
 import { Skeleton } from '@/shared/ui/Skeleton/Skeleton';
-import Text from '@/shared/ui/Text/Text';
 
 import { ArticleView } from '../../model/types/article';
 import cls from './ArticleListItem.module.scss';
