@@ -11,7 +11,9 @@ import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoade
 import { ContentUI } from '@/shared/ui/Content/ContentUI';
 
 import {
+  getArticlesPageHasMore,
   getArticlesPageIsLoading,
+  getArticlesPageNum,
   getArticlesPageView,
 } from '../../model/selectors/articlesPageSelectors';
 import { fetchArticlesList } from '../../model/services/fetchArticlesList/fetchArticlesList';
@@ -32,6 +34,10 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   const articles = useSelector(getArticles.selectAll);
   const isLoading = useSelector(getArticlesPageIsLoading);
   const view = useSelector(getArticlesPageView);
+  const page = useSelector(getArticlesPageNum);
+  const hasMore = useSelector(getArticlesPageHasMore);
+
+  console.log('page', page);
 
   const onChangeView = useCallback(
     (view: ArticleView) => {
@@ -40,11 +46,16 @@ const ArticlesPage = (props: ArticlesPageProps) => {
     [dispatch],
   );
 
+  const onLoadNextPage = useCallback(() => {
+    dispatch(articlesPageActions.setPage(page + 1));
+    dispatch(fetchArticlesList({ page: page + 1 }));
+  }, [dispatch, page]);
+
   useEffect(() => {
     dispatch(articlesPageActions.initState());
     dispatch(
       fetchArticlesList({
-        page: 2,
+        page: page,
       }),
     );
   }, []);
@@ -52,7 +63,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   useDynamicModuleLoader('articlesPage', articlesPageReducer);
 
   return (
-    <ContentUI>
+    <ContentUI onScrollEnd={onLoadNextPage}>
       <div className={classNames(cls.ArticlesPage, {}, [className])}>
         <div className="flex justify-end mb-4">
           <ArticleViewSelector view={view} onViewClick={onChangeView} />
