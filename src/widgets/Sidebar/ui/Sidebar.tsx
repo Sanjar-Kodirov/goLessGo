@@ -65,7 +65,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
 
   const itemsList = menuData.map((item) => {
     return (
-      <div key={item.id} className={classes.menuItem}>
+      <menu key={item.id} className={classes.menuItem}>
         <h2 className={classes.menuTitle}>{item.name}</h2>
         {item.sub?.map((sub) => {
           return sub.isAuth ? (
@@ -96,12 +96,12 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
             </Link>
           );
         })}
-      </div>
+      </menu>
     );
   });
 
   return (
-    <div
+    <menu
       className={cn(
         classes.sidebar,
         { [classes.collapsed]: collapsed },
@@ -109,6 +109,6 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
       )}
     >
       <div className={classes.menu}>{itemsList}</div>
-    </div>
+    </menu>
   );
 });

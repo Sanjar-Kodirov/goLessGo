@@ -10,6 +10,7 @@ import { CommentList } from '@/entities/Comment';
 import { AddCommentForm } from '@/features/addCommentForm';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
+import { ContentUI } from '@/shared/ui/Content/ContentUI';
 import Text, { TextType } from '@/shared/ui/Text/Text';
 
 import { getArticleCommentsIsLoading } from '../../model/selectors/comments';
@@ -71,13 +72,15 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
   }
 
   return (
-    <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
-      <ArticleDetails id={id} />
-      <Text type={TextType.H4} text="Комментарии" />
-      <AddCommentForm onSendComment={onSendComment} />
-      {/* @ts-ignore */}
-      <CommentList isLoading={isCommentLoading} comments={comments[0]} />
-    </div>
+    <ContentUI>
+      <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
+        <ArticleDetails id={id} />
+        <Text type={TextType.H4} text="Комментарии" />
+        <AddCommentForm onSendComment={onSendComment} />
+        {/* @ts-ignore */}
+        <CommentList isLoading={isCommentLoading} comments={comments[0]} />
+      </div>
+    </ContentUI>
   );
 };
 

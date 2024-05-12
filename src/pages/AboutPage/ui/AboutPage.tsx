@@ -1,5 +1,7 @@
+import { ContentUI } from '@/shared/ui/Content/ContentUI';
+
 const AboutPage = () => {
-  return <div>ABOUT PAGE</div>;
+  return <ContentUI>ABOUT PAGE</ContentUI>;
 };
 
 export default AboutPage;

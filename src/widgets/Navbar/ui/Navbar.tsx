@@ -35,7 +35,7 @@ const Navbar = memo(() => {
   };
 
   return (
-    <div className={classes.navbar}>
+    <header className={classes.navbar}>
       <div className={classes.navbarNav}>
         <AvatarUI
           name="CN"
@@ -54,7 +54,7 @@ const Navbar = memo(() => {
           <ModeToggle />
         </div>
       </div>
-    </div>
+    </header>
   );
 });
 
