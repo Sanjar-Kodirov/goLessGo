@@ -17,6 +17,7 @@ import {
   getArticlesPageView,
 } from '../../model/selectors/articlesPageSelectors';
 import { fetchArticlesList } from '../../model/services/fetchArticlesList/fetchArticlesList';
+import { fetchNextArticlesPage } from '../../model/services/fetchArticlesPage/fetchNextArticlesPage';
 import {
   articlesPageActions,
   articlesPageReducer,
@@ -47,9 +48,8 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   );
 
   const onLoadNextPage = useCallback(() => {
-    dispatch(articlesPageActions.setPage(page + 1));
-    dispatch(fetchArticlesList({ page: page + 1 }));
-  }, [dispatch, page]);
+    dispatch(fetchNextArticlesPage());
+  }, [dispatch, page, hasMore, isLoading]);
 
   useEffect(() => {
     dispatch(articlesPageActions.initState());
