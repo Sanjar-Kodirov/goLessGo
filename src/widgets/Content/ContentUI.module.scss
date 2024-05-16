@@ -1,4 +1,3 @@
 .Content {
-  // @apply flex-1 p-4 space-y-4 md:space-y-0 md:flex md:space-x-4;
-  @apply flex-1 p-4 w-full;
+  @apply flex-1 p-4 w-full h-full overflow-y-auto flex-1  pb-20 sm:px-4;
 }

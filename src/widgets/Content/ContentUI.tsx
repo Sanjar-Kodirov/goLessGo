@@ -40,15 +40,15 @@ const ContentUI: ContentUIType = (props) => {
     wrapperRef,
     // callback: onScrollEnd,
   });
-  const onScroll = (e: EventListener) => {
+
+  const onScroll = (e: any) => {
     console.log('working scrool', e);
   };
-  wrapperRef?.current?.addEventListener('scroll', () => onScroll);
 
   return (
     <section
       ref={wrapperRef}
-      // onScroll={onScroll}
+      onScroll={onScroll}
       className={classNames(cls.Content, className)}
     >
       {children}

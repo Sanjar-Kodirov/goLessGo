@@ -32,11 +32,11 @@ const MainLayout = () => {
       <Navbar />
       <div className="flex h-screen">
         <Sidebar />
-        {/* <div style={{ width: 'calc(100% - 240px)' }}> */}
-        <Suspense fallback={<div>Loading...</div>}>
-          <Outlet />
-        </Suspense>
-        {/* </div> */}
+        <div style={{ width: 'calc(100% - 240px)' }}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Outlet />
+          </Suspense>
+        </div>
       </div>
       <Toaster />;
     </div>
