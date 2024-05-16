@@ -95,8 +95,6 @@ export function makeServer() {
         let attrs = JSON.parse(request.requestBody);
         const user = schema.users.find(attrs.user);
 
-        console.log('articleId', user.attrs);
-
         return schema.comments.create({ ...attrs, user: user.attrs });
       });
 

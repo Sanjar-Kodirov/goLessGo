@@ -1,4 +1,7 @@
-import { ReducerManager } from '@/app/providers/StoreProvider/config/StateSchema';
+import {
+  MountedReducers,
+  ReducerManager,
+} from '@/app/providers/StoreProvider/config/StateSchema';
 import {
   Reducer,
   ReducersMapObject,
@@ -16,10 +19,11 @@ export function createReducerManager(
   let combinedReducer = combineReducers(reducers);
 
   let keysToRemove: StateSchemaKey[] = [];
+  const mountedReducers: MountedReducers = {};
 
   return {
     getReducerMap: () => reducers,
-
+    // getMountedReducers: () => mountedReducers,
     reduce: (state: StateSchema, action: UnknownAction) => {
       if (keysToRemove.length > 0) {
         state = { ...state };
@@ -37,6 +41,7 @@ export function createReducerManager(
       }
 
       reducers[key] = reducer;
+      mountedReducers[key] = true;
 
       combinedReducer = combineReducers(reducers);
     },
@@ -47,6 +52,7 @@ export function createReducerManager(
       }
 
       delete reducers[key];
+      mountedReducers[key] = false;
 
       keysToRemove.push(key);
 
