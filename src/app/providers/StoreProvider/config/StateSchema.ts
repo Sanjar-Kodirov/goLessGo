@@ -3,6 +3,7 @@ import { AxiosInstance } from 'axios';
 import { ArticleDetailsSchema } from '@/entities/Article';
 import { ProfileSchema } from '@/entities/Profile';
 import { LoginSchema } from '@/features/AuthByUserName';
+import { SaveScrollSchema } from '@/features/SaveScrool/models/types/SaveScrollTypes';
 import { ArticleDetailsCommentsSchema } from '@/pages/ArticleDetailsPage/model/types/ArticleDetailsCommentsSchema';
 import { ArticlesPageSchema } from '@/pages/ArticlesPage/model/types/articlesPageSchema';
 import {
@@ -21,6 +22,7 @@ export interface StateSchema {
   articleDetailsComments?: ArticleDetailsCommentsSchema;
   // addCommentForm?: AddCommentFormSchema;
   articlesPage?: ArticlesPageSchema;
+  saveScroll: SaveScrollSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

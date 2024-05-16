@@ -10,8 +10,8 @@ import { CommentList } from '@/entities/Comment';
 import { AddCommentForm } from '@/features/addCommentForm';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
-import { ContentUI } from '@/shared/ui/Content/ContentUI';
 import Text, { TextType } from '@/shared/ui/Text/Text';
+import { ContentUI } from '@/widgets/Content/ContentUI';
 
 import { getArticleCommentsIsLoading } from '../../model/selectors/comments';
 import { addCommentForArticle } from '../../model/services/addCommentForArticle/addCommentForArticle';

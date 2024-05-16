@@ -8,16 +8,14 @@ import { ArticleList } from '@/entities/Article/ui/ArticleList/ArticleList';
 import { ArticleViewSelector } from '@/entities/Article/ui/ArticleViewSelector/ArticleViewSelector';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoader';
-import { ContentUI } from '@/shared/ui/Content/ContentUI';
+import { ContentUI } from '@/widgets/Content/ContentUI';
 
 import {
   getArticlesPageHasMore,
-  getArticlesPageInited,
   getArticlesPageIsLoading,
   getArticlesPageNum,
   getArticlesPageView,
 } from '../../model/selectors/articlesPageSelectors';
-import { fetchArticlesList } from '../../model/services/fetchArticlesList/fetchArticlesList';
 import { fetchNextArticlesPage } from '../../model/services/fetchArticlesPage/fetchNextArticlesPage';
 import { initArticlesPage } from '../../model/services/initArticlesPage/initArticlesPage';
 import {

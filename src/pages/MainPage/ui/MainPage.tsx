@@ -1,4 +1,4 @@
-import { ContentUI } from '@/shared/ui/Content/ContentUI';
+import { ContentUI } from '@/widgets/Content/ContentUI';
 
 const MainPage = () => {
   return (
