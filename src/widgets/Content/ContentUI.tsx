@@ -38,7 +38,7 @@ const ContentUI: ContentUIType = (props) => {
   useInfinityScroll({
     triggerRef,
     wrapperRef,
-    // callback: onScrollEnd,
+    callback: onScrollEnd,
   });
 
   const onScroll = (e: any) => {

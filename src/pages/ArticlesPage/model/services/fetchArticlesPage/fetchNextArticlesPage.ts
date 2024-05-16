@@ -1,4 +1,7 @@
-import { ThunkConfig } from '@/app/providers/StoreProvider/config/StateSchema';
+import {
+  StateSchema,
+  ThunkConfig,
+} from '@/app/providers/StoreProvider/config/StateSchema';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import {
@@ -8,7 +11,6 @@ import {
 } from '../../selectors/articlesPageSelectors';
 import { articlesPageActions } from '../../slices/articlesPageSlice';
 import { fetchArticlesList } from '../fetchArticlesList/fetchArticlesList';
-import { StateSchema } from './../../../../../app/providers/StoreProvider/config/StateSchema';
 
 export const fetchNextArticlesPage = createAsyncThunk<
   void,
@@ -19,6 +21,8 @@ export const fetchNextArticlesPage = createAsyncThunk<
   const hasMore = getArticlesPageHasMore(getState() as StateSchema);
   const page = getArticlesPageNum(getState() as StateSchema);
   const isLoading = getArticlesPageIsLoading(getState() as StateSchema);
+
+  console.log('hasmore', hasMore);
 
   if (hasMore && !isLoading) {
     dispatch(articlesPageActions.setPage(page + 1));
