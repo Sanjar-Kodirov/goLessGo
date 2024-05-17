@@ -28,9 +28,12 @@ const MainLayout = () => {
   }
 
   return (
-    <div className="flex-col h-screen">
+    <div className="flex-col h-screen overflow-hidden">
       <Navbar />
-      <div className="flex h-screen">
+      <div
+        className="flex overflow-hidden"
+        style={{ height: 'calc(100vh - 60px)' }}
+      >
         <Sidebar />
         <div style={{ width: 'calc(100% - 240px)' }}>
           <Suspense fallback={<div>Loading...</div>}>

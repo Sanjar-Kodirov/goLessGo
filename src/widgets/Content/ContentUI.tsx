@@ -1,7 +1,20 @@
 import classNames from 'classnames';
+import { useSelector } from 'react-redux';
 
-import { MutableRefObject, ReactNode, useRef } from 'react';
+import {
+  MutableRefObject,
+  ReactNode,
+  UIEvent,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react';
 
+import { useLocation } from 'react-router-dom';
+
+import { StateSchema } from '@/app/providers/StoreProvider';
+import { getSaveScrollByPath, saveScrollActions } from '@/features/SaveScrool';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useInfinityScroll } from '@/shared/lib/hooks/useInfinityScroll';
 
 import cls from './ContentUI.module.scss';
@@ -32,8 +45,20 @@ type ContentUIType = React.FC<ContentPropsType> & {
 const ContentUI: ContentUIType = (props) => {
   const { className = '', onScrollEnd, children } = props;
 
+  const { pathname } = useLocation();
+
   const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
   const triggerRef = useRef() as MutableRefObject<HTMLDivElement>;
+
+  const dispatch = useAppDispatch();
+
+  const scrollPosition = useSelector((state: StateSchema) => {
+    return getSaveScrollByPath(state, pathname);
+  });
+
+  useEffect(() => {
+    wrapperRef.current.scrollTop = scrollPosition;
+  }, [scrollPosition]);
 
   useInfinityScroll({
     triggerRef,
@@ -41,15 +66,23 @@ const ContentUI: ContentUIType = (props) => {
     callback: onScrollEnd,
   });
 
-  const onScroll = (e: any) => {
-    console.log('working scrool', e);
-  };
+  const onScroll = useCallback(
+    (e: UIEvent<HTMLDivElement>) => {
+      dispatch(
+        saveScrollActions.setScrollPosition({
+          path: pathname,
+          position: e.currentTarget.scrollTop,
+        }),
+      );
+    },
+    [dispatch, pathname],
+  );
 
   return (
     <section
       ref={wrapperRef}
-      onScroll={onScroll}
       className={classNames(cls.Content, className)}
+      onScroll={onScroll}
     >
       {children}
       <div ref={triggerRef} />
