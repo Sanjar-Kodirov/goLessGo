@@ -16,6 +16,7 @@ import { StateSchema } from '@/app/providers/StoreProvider';
 import { getSaveScrollByPath, saveScrollActions } from '@/features/SaveScrool';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useInfinityScroll } from '@/shared/lib/hooks/useInfinityScroll';
+import { useThrottle } from '@/shared/lib/hooks/useThrottle';
 
 import cls from './ContentUI.module.scss';
 
@@ -66,17 +67,14 @@ const ContentUI: ContentUIType = (props) => {
     callback: onScrollEnd,
   });
 
-  const onScroll = useCallback(
-    (e: UIEvent<HTMLDivElement>) => {
-      dispatch(
-        saveScrollActions.setScrollPosition({
-          path: pathname,
-          position: e.currentTarget.scrollTop,
-        }),
-      );
-    },
-    [dispatch, pathname],
-  );
+  const onScroll = useThrottle((e: UIEvent<HTMLDivElement>) => {
+    dispatch(
+      saveScrollActions.setScrollPosition({
+        path: pathname,
+        position: e.currentTarget.scrollTop,
+      }),
+    );
+  }, 500);
 
   return (
     <section
