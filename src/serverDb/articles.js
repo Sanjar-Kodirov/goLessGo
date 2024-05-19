@@ -85,7 +85,7 @@ export const articles = [
     title: 'Go news 1',
     subtitle: 'Что нового в JS за 2022 год?',
     img: 'https://miro.medium.com/v2/resize:fit:1400/1*LyZcwuLWv2FArOumCxobpA.png',
-    views: 1022,
+    views: 10343422,
     createdAt: '26.02.2022',
     type: ['IT'],
     user: {
@@ -162,10 +162,10 @@ export const articles = [
   },
   {
     id: '4',
-    title: 'Go news 2',
+    title: 'Ruby news 2',
     subtitle: 'Что нового в JS за 2022 год?',
     img: 'https://miro.medium.com/v2/resize:fit:1400/1*LyZcwuLWv2FArOumCxobpA.png',
-    views: 1022,
+    views: 12332,
     createdAt: '26.02.2022',
     type: ['IT'],
     user: {
@@ -242,10 +242,10 @@ export const articles = [
   },
   {
     id: '5',
-    title: 'Go news 3',
+    title: 'Some news 3',
     subtitle: 'Что нового в JS за 2022 год?',
     img: 'https://miro.medium.com/v2/resize:fit:1400/1*LyZcwuLWv2FArOumCxobpA.png',
-    views: 1022,
+    views: 4533,
     createdAt: '26.02.2022',
     type: ['IT'],
     user: {
@@ -322,10 +322,10 @@ export const articles = [
   },
   {
     id: '6',
-    title: 'Go news 4',
+    title: 'Crash on the planet of programming',
     subtitle: 'Что нового в JS за 2022 год?',
     img: 'https://miro.medium.com/v2/resize:fit:1400/1*LyZcwuLWv2FArOumCxobpA.png',
-    views: 1022,
+    views: 6546,
     createdAt: '26.02.2022',
     type: ['IT'],
     user: {
@@ -402,10 +402,10 @@ export const articles = [
   },
   {
     id: '7',
-    title: 'Go news 5',
+    title: 'Very fucking news 5',
     subtitle: 'Что нового в JS за 2022 год?',
     img: 'https://miro.medium.com/v2/resize:fit:1400/1*LyZcwuLWv2FArOumCxobpA.png',
-    views: 1022,
+    views: 6543,
     createdAt: '26.02.2022',
     type: ['IT'],
     user: {
@@ -482,10 +482,10 @@ export const articles = [
   },
   {
     id: '8',
-    title: 'Go news 6',
+    title: 'About news news',
     subtitle: 'Что нового в JS за 2022 год?',
     img: 'https://miro.medium.com/v2/resize:fit:1400/1*LyZcwuLWv2FArOumCxobpA.png',
-    views: 1022,
+    views: 7867,
     createdAt: '26.02.2022',
     type: ['IT'],
     user: {
@@ -562,10 +562,10 @@ export const articles = [
   },
   {
     id: '9',
-    title: 'Go news 7',
+    title: 'Hello world news',
     subtitle: 'Что нового в JS за 2022 год?',
     img: 'https://miro.medium.com/v2/resize:fit:1400/1*LyZcwuLWv2FArOumCxobpA.png',
-    views: 1022,
+    views: 5644,
     createdAt: '26.02.2022',
     type: ['IT'],
     user: {
@@ -642,10 +642,10 @@ export const articles = [
   },
   {
     id: '10',
-    title: 'Go news 8',
+    title: 'How to be best of the best',
     subtitle: 'Что нового в JS за 2022 год?',
     img: 'https://miro.medium.com/v2/resize:fit:1400/1*LyZcwuLWv2FArOumCxobpA.png',
-    views: 1022,
+    views: 23,
     createdAt: '26.02.2022',
     type: ['IT'],
     user: {
@@ -722,10 +722,10 @@ export const articles = [
   },
   {
     id: '11',
-    title: 'Go news 9',
+    title: 'The killing features of all time about javascript',
     subtitle: 'Что нового в JS за 2022 год?',
     img: 'https://miro.medium.com/v2/resize:fit:1400/1*LyZcwuLWv2FArOumCxobpA.png',
-    views: 1022,
+    views: 43,
     createdAt: '26.02.2022',
     type: ['IT'],
     user: {
@@ -802,10 +802,10 @@ export const articles = [
   },
   {
     id: '12',
-    title: 'Go news 10',
+    title: 'Backend is bad',
     subtitle: 'Что нового в JS за 2022 год?',
     img: 'https://miro.medium.com/v2/resize:fit:1400/1*LyZcwuLWv2FArOumCxobpA.png',
-    views: 1022,
+    views: 67,
     createdAt: '26.02.2022',
     type: ['IT'],
     user: {
@@ -885,7 +885,7 @@ export const articles = [
     title: 'Go news 11',
     subtitle: 'Что нового в JS за 2022 год?',
     img: 'https://miro.medium.com/v2/resize:fit:1400/1*LyZcwuLWv2FArOumCxobpA.png',
-    views: 1022,
+    views: 56,
     createdAt: '26.02.2022',
     type: ['IT'],
     user: {
