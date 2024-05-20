@@ -23,6 +23,7 @@ import {
   articlesPageReducer,
   getArticles,
 } from '../../model/slices/articlesPageSlice';
+import { ArticlesPageFilters } from '../ArticlesPageFilters/ArticlesPageFilters';
 import cls from './ArticlesPage.module.scss';
 
 interface ArticlesPageProps {
@@ -58,6 +59,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   return (
     <ContentUI onScrollEnd={onLoadNextPage}>
       <div className={classNames(cls.ArticlesPage, {}, [className])}>
+        <ArticlesPageFilters />
         <div className="flex justify-end mb-4">
           <ArticleViewSelector view={view} onViewClick={onChangeView} />
         </div>
