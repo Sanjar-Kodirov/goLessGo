@@ -84,7 +84,7 @@ const articlesPageSlice = createSlice({
         fetchArticlesList.fulfilled,
         (state, action: PayloadAction<Article[]>) => {
           state.isLoading = false;
-          state.hasMore = action.payload.length > 1;
+          state.hasMore = action.payload.length < state.limit;
           articlesAdapter.addMany(state, action.payload);
 
           // if (action.meta.arg.replace) {
