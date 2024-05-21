@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 
 import { memo, useCallback, useEffect } from 'react';
 
+import { useSearchParams } from 'react-router-dom';
+
 import { ArticleView } from '@/entities/Article/model/types/article';
 import { ArticleList } from '@/entities/Article/ui/ArticleList/ArticleList';
 import { ArticleViewSelector } from '@/entities/Article/ui/ArticleViewSelector/ArticleViewSelector';
@@ -38,6 +40,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   const view = useSelector(getArticlesPageView);
   const page = useSelector(getArticlesPageNum);
   const hasMore = useSelector(getArticlesPageHasMore);
+  const [searchParams] = useSearchParams();
 
   const onChangeView = useCallback(
     (view: ArticleView) => {
@@ -51,7 +54,7 @@ const ArticlesPage = (props: ArticlesPageProps) => {
   }, [dispatch, page, hasMore, isLoading]);
 
   useEffect(() => {
-    dispatch(initArticlesPage());
+    dispatch(initArticlesPage(searchParams));
   }, []);
 
   useDynamicModuleLoader('articlesPage', articlesPageReducer, false);

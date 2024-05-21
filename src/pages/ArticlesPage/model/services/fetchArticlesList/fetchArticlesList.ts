@@ -4,6 +4,7 @@ import {
 } from '@/app/providers/StoreProvider/config/StateSchema';
 import { Article } from '@/entities/Article';
 import { ArticleType } from '@/entities/Article/model/types/article';
+import { addQueryParams } from '@/shared/lib/url/addQueryParams/addQueryParams';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import {
@@ -33,6 +34,14 @@ export const fetchArticlesList = createAsyncThunk<
   const type = getArticlesPageType(getState() as StateSchema);
 
   try {
+    addQueryParams({
+      _limit: String(limit),
+      _page: String(page),
+      _sort: sort,
+      _order: order,
+      q: search,
+      type: type === ArticleType.ALL ? undefined : type,
+    });
     const response = await extra.api.get<{
       articles: {
         modelName: string;
