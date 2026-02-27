@@ -20,6 +20,7 @@ export interface StateSchema {
   loginForm?: LoginSchema;
   articleDetails?: ArticleDetailsSchema;
   articleDetailsComments?: ArticleDetailsCommentsSchema;
+
   // addCommentForm?: AddCommentFormSchema;
   articlesPage?: ArticlesPageSchema;
   saveScroll: SaveScrollSchema;

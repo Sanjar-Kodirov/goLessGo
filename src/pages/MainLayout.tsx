@@ -11,6 +11,7 @@ import {
 } from '@/entities/Profile';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { Toaster } from '@/shared/ui/Notification/SonnerUI';
+import { Spinner } from '@/shared/ui/Spinner/Spinner';
 import { Navbar } from '@/widgets/Navbar';
 import { Sidebar } from '@/widgets/Sidebar';
 
@@ -24,7 +25,11 @@ const MainLayout = () => {
   }, []);
 
   if (!profileInited || profileIsLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <h1 className="flex items-center justify-center h-screen">
+        <Spinner size="xLarge" />
+      </h1>
+    );
   }
 
   return (
@@ -36,12 +41,18 @@ const MainLayout = () => {
       >
         <Sidebar />
         <div style={{ width: 'calc(100% - 240px)' }}>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center h-full">
+                <Spinner />
+              </div>
+            }
+          >
             <Outlet />
           </Suspense>
         </div>
       </div>
-      <Toaster />;
+      <Toaster />
     </div>
   );
 };
