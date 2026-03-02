@@ -1,5 +1,5 @@
 .card {
-  @apply mb-2;
+  @apply mb-2 transition-all duration-300;
 }
 .cardHeader {
   @apply flex justify-between items-center mb-2;

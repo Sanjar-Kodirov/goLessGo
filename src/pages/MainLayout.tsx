@@ -40,17 +40,15 @@ const MainLayout = () => {
         style={{ height: 'calc(100vh - 60px)' }}
       >
         <Sidebar />
-        <div style={{ width: 'calc(100% - 240px)' }}>
-          <Suspense
-            fallback={
-              <div className="flex items-center justify-center h-full">
-                <Spinner />
-              </div>
-            }
-          >
-            <Outlet />
-          </Suspense>
-        </div>
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center h-full">
+              <Spinner />
+            </div>
+          }
+        >
+          <Outlet />
+        </Suspense>
       </div>
       <Toaster />
     </div>

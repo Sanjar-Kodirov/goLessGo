@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
 import { memo, useCallback, useEffect } from 'react';
@@ -13,7 +12,6 @@ import { useDynamicModuleLoader } from '@/shared/lib/hooks/useDynamicModuleLoade
 import { ContentUI } from '@/widgets/Content/ContentUI';
 
 import {
-  getArticlesPageHasMore,
   getArticlesPageIsLoading,
   getArticlesPageNum,
   getArticlesPageView,
@@ -26,20 +24,14 @@ import {
   getArticles,
 } from '../../model/slices/articlesPageSlice';
 import { ArticlesPageFilters } from '../ArticlesPageFilters/ArticlesPageFilters';
-import cls from './ArticlesPage.module.scss';
 
-interface ArticlesPageProps {
-  className?: string;
-}
-
-const ArticlesPage = (props: ArticlesPageProps) => {
-  const { className } = props;
+const ArticlesPage = () => {
   const dispatch = useAppDispatch();
   const articles = useSelector(getArticles.selectAll);
   const isLoading = useSelector(getArticlesPageIsLoading);
   const view = useSelector(getArticlesPageView);
   const page = useSelector(getArticlesPageNum);
-  const hasMore = useSelector(getArticlesPageHasMore);
+
   const [searchParams] = useSearchParams();
 
   const onChangeView = useCallback(
@@ -51,23 +43,21 @@ const ArticlesPage = (props: ArticlesPageProps) => {
 
   const onLoadNextPage = useCallback(() => {
     dispatch(fetchNextArticlesPage());
-  }, [dispatch, page, hasMore, isLoading]);
+  }, [dispatch, isLoading]);
 
   useEffect(() => {
     dispatch(initArticlesPage(searchParams));
-  }, []);
+  }, [dispatch, searchParams]);
 
   useDynamicModuleLoader('articlesPage', articlesPageReducer, false);
 
   return (
     <ContentUI onScrollEnd={onLoadNextPage}>
-      <div className={classNames(cls.ArticlesPage, {}, [className])}>
-        <ArticlesPageFilters />
-        <div className="flex justify-end mb-4">
-          <ArticleViewSelector view={view} onViewClick={onChangeView} />
-        </div>
-        <ArticleList isLoading={isLoading} view={view} articles={articles} />
+      <ArticlesPageFilters />
+      <div className="flex justify-end mb-4">
+        <ArticleViewSelector view={view} onViewClick={onChangeView} />
       </div>
+      <ArticleList isLoading={isLoading} view={view} articles={articles} />
     </ContentUI>
   );
 };

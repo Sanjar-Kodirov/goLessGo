@@ -92,15 +92,7 @@ export const ArticlesPageFilters = memo((props: ArticlesPageFiltersProps) => {
 
   return (
     <div className={classNames(cls.ArticlesPageFilters, {}, [className])}>
-      <div className={cls.sortWrapper}>
-        {/* <ArticleSortSelector
-          order={order}
-          sort={sort}
-          onChangeOrder={onChangeOrder}
-          onChangeSort={onChangeSort}
-        /> */}
-        <ArticleViewSelector view={view} onViewClick={onChangeView} />
-      </div>
+      <div className={cls.sortWrapper}></div>
       <Card className={cls.search}>
         <Input
           onChange={(event) => onChangeSearch(event.target.value)}
