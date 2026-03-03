@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 import { memo, useCallback, useMemo } from 'react';
 
-import { TabItem, Tabs } from '@/shared/ui/Tabs/Tabs';
+import { TabItem, TabsUI } from '@/shared/ui/Tabs/TabsUI';
 
 import { ArticleType } from '../../model/types/article';
 
@@ -45,7 +45,7 @@ export const ArticleTypeTabs = memo((props: ArticleTypeTabsProps) => {
   );
 
   return (
-    <Tabs
+    <TabsUI
       tabs={typeTabs}
       value={value}
       onTabClick={onTabClick}

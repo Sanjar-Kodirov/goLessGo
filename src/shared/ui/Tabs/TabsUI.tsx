@@ -2,8 +2,8 @@ import classNames from 'classnames';
 
 import { ReactNode, memo, useCallback } from 'react';
 
-import { Card } from '../Card/CardUI';
 import cls from './Tabs.module.scss';
+import { Tabs, TabsList, TabsTrigger } from './tabs';
 
 export interface TabItem {
   value: string;
@@ -17,7 +17,7 @@ interface TabsProps {
   onTabClick: (tab: TabItem) => void;
 }
 
-export const Tabs = memo((props: TabsProps) => {
+export const TabsUI = memo((props: TabsProps) => {
   const { className, tabs, onTabClick, value } = props;
 
   const clickHandle = useCallback(
@@ -28,12 +28,18 @@ export const Tabs = memo((props: TabsProps) => {
   );
 
   return (
-    <div className={classNames(cls.Tabs, {}, [className])}>
-      {tabs.map((tab) => (
-        <Card className={cls.tab} key={tab.value} onClick={clickHandle(tab)}>
-          {tab.content}
-        </Card>
-      ))}
-    </div>
+    <Tabs value={value} className={classNames(cls.Tabs, {}, [className])}>
+      <TabsList>
+        {tabs.map((tab) => (
+          <TabsTrigger
+            value={tab.value}
+            key={tab.value}
+            onClick={clickHandle(tab)}
+          >
+            {tab.content}
+          </TabsTrigger>
+        ))}
+      </TabsList>
+    </Tabs>
   );
 });

@@ -1,3 +1,7 @@
 .Content {
   @apply flex-1 p-4 w-full h-full overflow-y-auto pb-3.5 sm:px-4;
 }
+
+.trigger {
+  @apply h-1 m-4;
+}
