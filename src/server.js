@@ -83,6 +83,13 @@ export function makeServer() {
         }
       });
 
+      this.get('/api/articles/recommendations', (schema, request) => {
+        checkAuth(schema, request);
+
+        const articles = schema.articles.all().slice(0, 4);
+        return articles;
+      });
+
       this.get('/api/comments', (schema, request) => {
         checkAuth(schema, request);
 

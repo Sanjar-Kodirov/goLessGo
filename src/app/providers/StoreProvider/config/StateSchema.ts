@@ -4,7 +4,7 @@ import { ArticleDetailsSchema } from '@/entities/Article';
 import { ProfileSchema } from '@/entities/Profile';
 import { LoginSchema } from '@/features/AuthByUserName';
 import { SaveScrollSchema } from '@/features/SaveScrool/models/types/SaveScrollTypes';
-import { ArticleDetailsCommentsSchema } from '@/pages/ArticleDetailsPage/model/types/ArticleDetailsCommentsSchema';
+import { ArticleDetailsPageSchema } from '@/pages/ArticleDetailsPage/model/types';
 import { ArticlesPageSchema } from '@/pages/ArticlesPage/model/types/articlesPageSchema';
 import {
   EnhancedStore,
@@ -19,7 +19,7 @@ export interface StateSchema {
   // async
   loginForm?: LoginSchema;
   articleDetails?: ArticleDetailsSchema;
-  articleDetailsComments?: ArticleDetailsCommentsSchema;
+  articleDetailsPage?: ArticleDetailsPageSchema;
 
   // addCommentForm?: AddCommentFormSchema;
   articlesPage?: ArticlesPageSchema;

@@ -14,21 +14,58 @@ export type ReducersList = {
 
 export const useDynamicModuleLoader = (
   name: StateSchemaKey,
-  reducer: any,
+  reducer?: Reducer,
   removeAfterUnmount?: boolean,
+  reducers?: ReducersList,
 ) => {
   const store = useStore() as ReduxStoreWithManager;
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   store.reducerManager.add(name, reducer);
+  //   dispatch({ type: `@INIT ${name} reducer` });
+
+  //   return () => {
+  //     if (removeAfterUnmount) {
+  //       store.reducerManager.remove(name);
+  //       dispatch({ type: `@DESTROY ${name} reducer` });
+  //     }
+  //   };
+  // }, [dispatch, store, name, reducer, removeAfterUnmount]);
+
   useEffect(() => {
-    store.reducerManager.add(name, reducer);
-    dispatch({ type: `@INIT ${name} reducer` });
+    const mountedReducers = store.reducerManager.getReducerMap();
+
+    if (!reducers || Object.keys(reducers).length === 0) {
+      if (reducer) {
+        store.reducerManager.add(name, reducer);
+        dispatch({ type: `@INIT ${name} reducer` });
+      }
+
+      return () => {
+        if (removeAfterUnmount) {
+          store.reducerManager.remove(name);
+          dispatch({ type: `@DESTROY ${name} reducer` });
+        }
+      };
+    }
+
+    Object.entries(reducers).forEach(([name, reducer]) => {
+      const mounted = mountedReducers[name as StateSchemaKey];
+      // Add new reducer only if it doesn't exist
+      if (!mounted) {
+        store.reducerManager.add(name as StateSchemaKey, reducer);
+        dispatch({ type: `@INIT ${name} reducer` });
+      }
+    });
 
     return () => {
       if (removeAfterUnmount) {
-        store.reducerManager.remove(name);
-        dispatch({ type: `@DESTROY ${name} reducer` });
+        Object.entries(reducers).forEach(([name, reducer]) => {
+          store.reducerManager.remove(name as StateSchemaKey);
+          dispatch({ type: `@DESTROY ${name} reducer` });
+        });
       }
     };
-  }, [dispatch, store, name, reducer, removeAfterUnmount]);
+  }, [dispatch, store, reducers, removeAfterUnmount]);
 };

@@ -54,7 +54,7 @@ export enum ArticleView {
 
 export interface Article {
   user: User;
-  id: string;
+  id: number;
   title: string;
   subtitle: string;
   img: string;
