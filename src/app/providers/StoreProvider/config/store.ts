@@ -16,7 +16,7 @@ export function createReduxStore(
     saveScroll: saveScrollReducer,
   };
 
-  const reducerManager = createReducerManager(rootReducers); 
+  const reducerManager = createReducerManager(rootReducers);
 
   const store = configureStore({
     reducer: reducerManager.reduce as Reducer<StateSchema>,

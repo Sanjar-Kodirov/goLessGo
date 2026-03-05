@@ -42,8 +42,8 @@ const MainLayout = () => {
         <Sidebar />
         <Suspense
           fallback={
-            <div className="flex items-center justify-center h-full">
-              <Spinner />
+            <div className="flex items-center justify-center h-full w-full">
+              <Spinner size="large" />
             </div>
           }
         >

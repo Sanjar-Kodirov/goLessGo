@@ -87,13 +87,13 @@ export function makeServer() {
         checkAuth(schema, request);
 
         const articles = schema.articles.all().slice(0, 4);
-        return articles;
+        return articles.models; // ← Возвращаем массив моделей, а не коллекцию
       });
 
       this.get('/api/comments', (schema, request) => {
         checkAuth(schema, request);
 
-        return schema.comments.all();
+        return schema.comments.all().models; // ← Также исправляем для консистентности
       });
 
       this.post('/api/comments', (schema, request) => {

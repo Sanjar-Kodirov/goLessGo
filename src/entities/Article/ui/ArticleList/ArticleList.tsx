@@ -23,6 +23,7 @@ const getSkeletons = (view: ArticleView) =>
 
 export const ArticleList = memo((props: ArticleListProps) => {
   const { className, articles, view = ArticleView.GRID, isLoading } = props;
+
   const renderArticle = (article: Article) => (
     <ArticleListItem
       article={article}

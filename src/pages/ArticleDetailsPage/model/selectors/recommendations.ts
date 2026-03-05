@@ -7,7 +7,3 @@ export const getArticleRecommendationsIsLoading = (state: StateSchema) => {
 export const getArticleRecommendationsError = (state: StateSchema) => {
   return state.articleDetailsPage?.recommendations?.error;
 };
-
-export const getArticleRecommendations = (state: StateSchema) => {
-  return state.articleDetailsPage?.recommendations ?? [];
-};
