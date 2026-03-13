@@ -25,6 +25,7 @@ import { articleDetailsPageReducer } from '../../model/slices';
 import { getArticleComments } from '../../model/slices/articleDetailsCommentsSlice';
 import { getArticleRecommendations } from '../../model/slices/articleDetailsPageRecommendationsSlice';
 import cls from './ArticleDetailsPage.module.scss';
+import { ArticleDetailsPageHeader } from '../ArticleDetailsPageHeader/ArticleDetailsPageHeader';
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -82,6 +83,7 @@ const ArticleDetailsPage = (props: ArticleDetailsPageProps) => {
   return (
     <ContentUI>
       <div className={classNames(cls.ArticleDetailsPage, {}, [className])}>
+        <ArticleDetailsPageHeader />
         <ArticleDetails id={id} />
         <Text type={TextType.H4} text="Комментарии" />
         <AddCommentForm onSendComment={onSendComment} />

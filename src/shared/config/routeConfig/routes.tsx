@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { AboutPage } from '@/pages/AboutPage';
 import { ArticleDetailsPage } from '@/pages/ArticleDetailsPage';
+import { ArticleEditPage } from '@/pages/ArticleEditPage';
 import ArticlesPage from '@/pages/ArticlesPage/ui/ArticlesPage/ArticlesPage';
 import MainLayout from '@/pages/MainLayout';
 import { MainPage } from '@/pages/MainPage';
@@ -15,6 +16,8 @@ export enum AppRoutes {
   PROFILE = 'profile',
   ARTICLES = 'articles',
   ARTICLE_DETAILS = 'article_details',
+  ARTICLE_CREATE = 'article_create',
+  ARTICLE_EDIT = 'article_edit',
   ABOUT = 'about',
 
   NOT_FOUND = 'not_found',
@@ -25,6 +28,8 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.PROFILE]: '/profile',
   [AppRoutes.ARTICLES]: '/articles',
   [AppRoutes.ARTICLE_DETAILS]: '/articles',
+  [AppRoutes.ARTICLE_CREATE]: '/articles/create',
+  [AppRoutes.ARTICLE_EDIT]: '/articles/:id/edit',
   [AppRoutes.ABOUT]: '/about',
   [AppRoutes.NOT_FOUND]: '*',
 };
@@ -51,6 +56,22 @@ export const router = createBrowserRouter([
         element: (
           <RequireAuth>
             <ArticleDetailsPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: `${RoutePath.article_create}`,
+        element: (
+          <RequireAuth>
+            <ArticleEditPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: `${RoutePath.article_edit}`,
+        element: (
+          <RequireAuth>
+            <ArticleEditPage />
           </RequireAuth>
         ),
       },

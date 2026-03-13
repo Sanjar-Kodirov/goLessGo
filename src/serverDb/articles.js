@@ -8,7 +8,7 @@ export const articles = [
     createdAt: '26.02.2022',
     type: ['IT'],
     user: {
-      id: '2',
+      id: '1',
       email: '2@2.com',
       username: 's',
       age: 24,
